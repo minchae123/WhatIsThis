@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769aa0990a243884098e3ed245f59daa, type: 3}
   m_Name: Crab1
   m_EditorClassIdentifier: 
-  number: 1
+  number: 0
   image: {fileID: 0}
