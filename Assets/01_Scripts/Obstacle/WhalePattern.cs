@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class WhalePattern : MonoBehaviour
+public class WhalePattern : PoolableMono
 {
     [SerializeField] private Sprite smile;
     [SerializeField] private Sprite yam;
@@ -24,6 +24,11 @@ public class WhalePattern : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        WhaleSpawn();
+    }
+
+    public void WhaleSpawn()
+    {
         isRight = Random.Range(0, 2) == 0 ? false : true;
         Flip();
 
@@ -44,12 +49,12 @@ public class WhalePattern : MonoBehaviour
 
         transform.position = spawnPos;
 
+        SwimSea();
     }
 
     private void Start()
     {
 
-        SwimSea();
     }
 
     private void Update()
@@ -66,5 +71,10 @@ public class WhalePattern : MonoBehaviour
     public void Flip()
     {
         spriteRenderer.flipX = !isRight;
+    }
+
+    public override void Reset()
+    {
+        WhaleSpawn();
     }
 }
