@@ -71,7 +71,7 @@ public class Roulette : MonoBehaviour
 			accumulatedWeight += roulettePieceData[i].chance;
 			roulettePieceData[i].weight = accumulatedWeight;
 
-			Debug.Log($"({roulettePieceData[i].index}){roulettePieceData[i].description}:{roulettePieceData[i].weight}");
+			//Debug.Log($"({roulettePieceData[i].index}){roulettePieceData[i].description}:{roulettePieceData[i].weight}");
 		}
 	}
 
@@ -107,9 +107,9 @@ public class Roulette : MonoBehaviour
 		int	  rotateSpeed	= 2;
 		float targetAngle	= (randomAngle + 360 * spinDuration * rotateSpeed);
 
-		Debug.Log($"SelectedIndex:{selectedIndex}, Angle:{angle}");
-		Debug.Log($"left/right/random:{leftOffset}/{rightOffset}/{randomAngle}");
-		Debug.Log($"targetAngle:{targetAngle}");
+		//Debug.Log($"SelectedIndex:{selectedIndex}, Angle:{angle}");
+		//Debug.Log($"left/right/random:{leftOffset}/{rightOffset}/{randomAngle}");
+		//Debug.Log($"targetAngle:{targetAngle}");
 
 		isSpinning = true;
 		StartCoroutine(OnSpin(targetAngle, action));
