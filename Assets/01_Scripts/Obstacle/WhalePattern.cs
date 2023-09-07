@@ -11,14 +11,45 @@ public class WhalePattern : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    public int minX;
-    public int maxX;
-    public int minY;
-    public int maxY;
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+
+    private Vector2 targetPos;
+    private Vector2 spawnPos;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        isRight = Random.Range(0, 2) == 0 ? false : true;
+        Flip();
+
+        if (isRight)
+        {
+            float randomY = Random.Range(minY, maxY);
+            spawnPos = new Vector2(maxX, randomY);
+        }
+        else
+        {
+            float randomY = Random.Range(minY, maxY);
+            spawnPos = new Vector2(minX, randomY);
+        }
+    }
+
+    private void Start()
+    {
+        if (isRight)
+        {
+            float randomY = Random.Range(minY, maxY);
+            targetPos = new Vector2(minX, randomY);
+        }
+        else
+        {
+            float randomY = Random.Range(minY, maxY);
+            targetPos = new Vector2(maxX, randomY);
+        }
     }
 
     private void Update()
@@ -33,6 +64,6 @@ public class WhalePattern : MonoBehaviour
 
     public void Flip()
     {
-        spriteRenderer.flipX = !spriteRenderer.flipX;
+        spriteRenderer.flipX = isRight;
     }
 }
