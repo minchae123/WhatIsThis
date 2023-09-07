@@ -8,15 +8,18 @@ public class Dragger : MonoBehaviour
 {
     Vector3 MousePosition;
     Crab _crab;
+    SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _crab = GetComponent<Crab>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnMouseDrag()
     {
         transform.position = GetMousePos();
+        _spriteRenderer.sortingOrder = CrabManager.Instance.CrabLayer+=1;
     }
     private void OnMouseUp()
     {

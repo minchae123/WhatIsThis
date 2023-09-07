@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Crab2
   m_EditorClassIdentifier: 
   number: 2
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 0891c614a8915484d86ae0f5ce67ed48, type: 3}
