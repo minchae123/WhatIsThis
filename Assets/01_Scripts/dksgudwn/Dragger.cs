@@ -31,7 +31,7 @@ public class Dragger : MonoBehaviour
     IEnumerator MouseUp()
     {
         _crab.ColliderCheck = true;
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.05f);
         //Debug.Log(_crab.ColliderCheck);
         _crab.ColliderCheck = false;
     }
