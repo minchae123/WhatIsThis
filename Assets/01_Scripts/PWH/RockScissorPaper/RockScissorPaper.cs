@@ -32,7 +32,6 @@ public class RockScissorPaper : AutoRCP
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isBtn);
         countText.text = (Timer() == null)? "" : Timer()[0].ToString();
         ShowUI();
     }
