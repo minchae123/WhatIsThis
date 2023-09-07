@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class WhalePattern : MonoBehaviour
+public class WhalePattern : PoolableMono
 {
     [SerializeField] private Sprite smile;
     [SerializeField] private Sprite yam;
@@ -16,13 +17,18 @@ public class WhalePattern : MonoBehaviour
     public float minY;
     public float maxY;
 
-    private Vector2 targetPos;
-    private Vector2 spawnPos;
+    public Vector2 targetPos;
+    public Vector2 spawnPos;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        WhaleSpawn();
+    }
+
+    public void WhaleSpawn()
+    {
         isRight = Random.Range(0, 2) == 0 ? false : true;
         Flip();
 
@@ -30,26 +36,25 @@ public class WhalePattern : MonoBehaviour
         {
             float randomY = Random.Range(minY, maxY);
             spawnPos = new Vector2(maxX, randomY);
-        }
-        else
-        {
-            float randomY = Random.Range(minY, maxY);
-            spawnPos = new Vector2(minX, randomY);
-        }
-    }
-
-    private void Start()
-    {
-        if (isRight)
-        {
-            float randomY = Random.Range(minY, maxY);
+            randomY = Random.Range(minY, maxY);
             targetPos = new Vector2(minX, randomY);
         }
         else
         {
             float randomY = Random.Range(minY, maxY);
+            spawnPos = new Vector2(minX, randomY);
+            randomY = Random.Range(minY, maxY);
             targetPos = new Vector2(maxX, randomY);
         }
+
+        transform.position = spawnPos;
+
+        SwimSea();
+    }
+
+    private void Start()
+    {
+
     }
 
     private void Update()
@@ -58,12 +63,18 @@ public class WhalePattern : MonoBehaviour
     }
 
     public void SwimSea()
-    { 
-        
+    {
+        float ranx = Random.Range(5, 7);
+        transform.DOMove(targetPos, ranx);
     }
 
     public void Flip()
     {
-        spriteRenderer.flipX = isRight;
+        spriteRenderer.flipX = !isRight;
+    }
+
+    public override void Reset()
+    {
+        WhaleSpawn();
     }
 }
