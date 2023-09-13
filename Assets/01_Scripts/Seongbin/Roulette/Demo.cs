@@ -8,9 +8,9 @@ public class Demo : MonoBehaviour
 
     bool _isEnd = true;
 
-    private void Update()
+    public void SpinStart()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isEnd)
+        if (_isEnd)
         {
             roulette.Spin(EndOfSpin);
             _isEnd = false;
@@ -20,7 +20,7 @@ public class Demo : MonoBehaviour
     private void EndOfSpin(RoulettePieceData selectedData)
     {
         Debug.Log($"{selectedData.index}:{selectedData.description}");
-        
+
         _isEnd = true;
     }
 }
