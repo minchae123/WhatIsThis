@@ -4,38 +4,70 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Dragger : MonoBehaviour
+public class Dragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     Vector3 MousePosition;
-    Crab _crab;
-    SpriteRenderer _spriteRenderer;
+    public Camera _camera;
 
-    private void Awake()
+
+    //public static Camera Camera
+    //{
+    //    get
+    //    {
+    //        if (_camera == null) _camera = Camera.main;
+    //        return _camera;
+    //    }
+    //}
+
+    private void Start()
     {
-        _crab = GetComponent<Crab>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        //_camera = GetComponent<Camera>();
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+
     }
 
-    private void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
-        transform.position = GetMousePos();
-        _spriteRenderer.sortingOrder = CrabManager.Instance.CrabLayer+=1;
+        transform.position = eventData.position;
     }
-    private void OnMouseUp()
+
+    public void OnDrop(PointerEventData eventData)
     {
-        StartCoroutine(MouseUp());
+        MousePosition = eventData.position;
+        MousePosition = _camera.ScreenToWorldPoint(MousePosition);
+
+        RaycastHit2D hit = Physics2D.Raycast(MousePosition, transform.forward, 10);
+        Debug.DrawRay(MousePosition, transform.forward * 10, Color.red, 1f);
+        //hit.transform.GetComponent<CrabSO>
+        if (hit.collider != null)
+        {
+            int collisionNumber = hit.transform.GetComponent<Crab>().crabData.Number;
+            int myNumber = this.gameObject.GetComponent<Crab>().crabData.Number;
+            if (hit.transform.tag == "Crab" && collisionNumber == myNumber)
+            {
+                Debug.Log("사이즈 같은 게");
+            }
+            else if (hit.transform.tag == "Crab" && collisionNumber != myNumber)
+            {
+                Debug.Log("사이즈 다른 게");
+            }
+        }
     }
-    Vector3 GetMousePos()
+
+    public void OnEndDrag(PointerEventData eventData)
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        return mousePos;
     }
-    IEnumerator MouseUp()
-    {
-        _crab.ColliderCheck = true;
-        yield return new WaitForSeconds(0.05f);
-        //Debug.Log(_crab.ColliderCheck);
-        _crab.ColliderCheck = false;
-    }
+
+    //private void OnMouseDrag()
+    //{
+    //    transform.position = GetMousePos();
+    //}
+    //Vector3 GetMousePos()
+    //{
+    //    var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    mousePos.z = 0;
+    //    return mousePos;
+    //}
 }
