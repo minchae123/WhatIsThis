@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class CrabManager : MonoBehaviour
     public int CrabLayer;
     public CrabSO[] CrabData;
 
+    [SerializeField]
+    private GameObject crabPrefab;
+
     void Awake()
     {
         // Scene에 이미 인스턴스가 존재 하는지 확인 후 처리
@@ -34,5 +38,13 @@ public class CrabManager : MonoBehaviour
 
         // Scene 이동 시 삭제 되지 않도록 처리
         DontDestroyOnLoad(this.gameObject);
+
+    }
+    public void MergeCrab(int v, Vector3 pos)
+    {
+        crabPrefab.GetComponent<Crab>().crabData = CrabData[v];
+        print("생성");
+        GameObject crab = Instantiate(crabPrefab, transform.position, Quaternion.identity);
+        crab.transform.position = pos;
     }
 }
