@@ -17,18 +17,25 @@ public class WhalePattern : PoolableMono
     public float minY;
     public float maxY;
 
+    [SerializeField] private float speed = 0.01f;
+
+
     public Vector2 targetPos;
     public Vector2 spawnPos;
 
+    private Collider2D col;
+
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        col = GetComponentInChildren<Collider2D>();
         WhaleSpawn();
     }
 
     public void WhaleSpawn()
     {
+        col.enabled = true;
+        spriteRenderer.sprite = yam;
         isRight = Random.Range(0, 2) == 0 ? false : true;
         Flip();
 
@@ -46,26 +53,16 @@ public class WhalePattern : PoolableMono
             randomY = Random.Range(minY, maxY);
             targetPos = new Vector2(maxX, randomY);
         }
-
         transform.position = spawnPos;
-
-        SwimSea();
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
     {
-
-    }
-
-    public void SwimSea()
-    {
-        float ranx = Random.Range(5, 7);
-        transform.DOMove(targetPos, ranx);
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            WhaleSpawn();
+        }
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed);
     }
 
     public void Flip()
@@ -76,5 +73,16 @@ public class WhalePattern : PoolableMono
     public override void Reset()
     {
         WhaleSpawn();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Crab"))
+        {
+            print("°í·¡°¡ ¸Ô¾î¹ö·ö");
+            spriteRenderer.sprite = yam;
+            col.enabled = false;
+        }
+
     }
 }
