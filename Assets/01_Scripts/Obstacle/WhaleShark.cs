@@ -3,36 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class WhalePattern : PoolableMono
+public class WhaleShark : PoolableMono
 {
     [SerializeField] private Sprite smile;
     [SerializeField] private Sprite yam;
 
-    private bool isRight;
-
-    private SpriteRenderer spriteRenderer;
-
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
+    [SerializeField] private float minY;
+    [SerializeField] private float maxY;
 
     [SerializeField] private float speed = 0.01f;
 
+    [SerializeField] private Vector2 targetPos;
+    [SerializeField] private Vector2 spawnPos;
 
-    public Vector2 targetPos;
-    public Vector2 spawnPos;
-
+    private bool isRight;
+    private SpriteRenderer spriteRenderer;
     private Collider2D col;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         col = GetComponentInChildren<Collider2D>();
-        WhaleSpawn();
     }
 
-    public void WhaleSpawn()
+    public void Spawn()
     {
         col.enabled = true;
         spriteRenderer.sprite = yam;
@@ -60,7 +56,7 @@ public class WhalePattern : PoolableMono
     {
         if(Input.GetKeyDown(KeyCode.A))
         {
-            WhaleSpawn();
+            Spawn();
         }
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed);
     }
@@ -72,15 +68,15 @@ public class WhalePattern : PoolableMono
 
     public override void Reset()
     {
-        WhaleSpawn();
+        Spawn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Crab"))
         {
-            print("°í·¡°¡ ¸Ô¾î¹ö·ö");
-            spriteRenderer.sprite = yam;
+            spriteRenderer.sprite = smile;
+            Destroy(collision.gameObject);
             col.enabled = false;
         }
 

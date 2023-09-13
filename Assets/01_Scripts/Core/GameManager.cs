@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void MakePool()
     {
-        PoolManager.Instance = new PoolManager(transform); // 풀매니저 만들고
-        poolingList.list.ForEach(p => PoolManager.Instance.CreatePool(p.prefab, p.poolCount)); // 리스트에 p 로 모두 들어와서 foreach 도는거
+        PoolManager.Instance = new PoolManager(transform); 
+        poolingList.list.ForEach(p => PoolManager.Instance.CreatePool(p.prefab, p.poolCount)); 
     }
 }
