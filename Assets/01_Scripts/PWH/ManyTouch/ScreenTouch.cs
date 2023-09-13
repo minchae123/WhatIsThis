@@ -6,26 +6,70 @@ using TMPro;
 
 public class ScreenTouch : MonoBehaviour
 {
-    int count = 0;
-    [SerializeField] TextMeshProUGUI text;
-    [SerializeField] Ease ease;
+    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] protected TextMeshProUGUI Score;
     private Sequence seq;
+
+    protected string Scoretext;
+    [SerializeField]private float timeLimit = 20;
+
+    [SerializeField] protected int totalScore;
+    private int clickCount;
+
+    private int minCount = 3;
+    private int maxCount = 7;
+
+    private bool isClick = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         seq = DOTween.Sequence();
         seq.Append(text.transform.DOScale(1.05f, 0.5f).SetLoops(-1, LoopType.Yoyo));
+
+        StartCoroutine(Timer());
     }
 
     // Update is called once per frame
     public void BtnClick()
     {
-        seq.Kill();
-        
-        Sequence s = DOTween.Sequence();
-        s.Kill();
+        StartCoroutine(ClickDotween());
 
-        s.Append(text.transform.DOScale(1.2f, 0.1f).SetLoops(2, LoopType.Yoyo));
-        //count++;
+        clickCount = Random.Range(minCount, maxCount);
+        totalScore += clickCount;
+
+        text.text = totalScore.ToString();
+
+        isClick = true;
+    }
+
+    private IEnumerator ClickDotween()
+    {
+        seq.Append(text.transform.DOScale(1.05f, 0.5f).SetLoops(-1, LoopType.Yoyo));
+        yield return new WaitForSeconds(.1f);
+        seq.Append(text.transform.DOScale(1.5f, 0.1f).SetLoops(2, LoopType.Yoyo));
+    }
+
+     private void Update()
+    {
+        Score.text = timeLimit.ToString();
+        Debug.Log(Score.text);
+    }
+
+    IEnumerator Timer()
+    {
+        while(true)
+        {
+             yield return new WaitForSeconds(1);
+
+            if(isClick)
+            {
+                timeLimit--;
+
+                if(timeLimit == 0)
+                {
+                    //³¡³ª°í ¾îÂ¼°í ÀúÂ¼°í 
+                }
+            }
+        }
     }
 }
