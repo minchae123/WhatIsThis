@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2011379218181107966}
   - component: {fileID: 2011379218181107953}
   m_Layer: 0
-  m_Name: Crab
+  m_Name: Crab1
   m_TagString: Crab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3f74349706e504c91fc5003772b2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crabData: {fileID: 0}
+  crabData: {fileID: 11400000, guid: bf50fbeb0dfb42f4db4dba4bb51ffda8, type: 2}
   ColliderCheck: 0
 --- !u!50 &2011379218181107966
 Rigidbody2D:

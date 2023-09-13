@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Crab : MonoBehaviour
@@ -31,19 +32,25 @@ public class Crab : MonoBehaviour
             int collisionSize = collision.gameObject.GetComponent<Crab>().crabData.Number;
             if (collision.tag == "Crab" && collisionSize == this.crabData.Number)
             {
-
-                _crabPrefab.crabData = CrabManager.Instance.CrabData[_crabPrefab.crabData.Number + 1];
-                Debug.Log(_crabPrefab.crabData.Number + 1);
-                Debug.Log(_crabPrefab.crabData);
-                Instantiate(_crabPrefab, transform);
-
-                Destroy(collision.gameObject);
+                //
+                CrabManager.Instance.MergeCrab(collisionSize + 1, transform.position);
+                StartCoroutine(delayCoroutine(10f, collision));
                 Destroy(gameObject);
+                Destroy(collision.gameObject);
             }
             else if (collision.tag == "Crab" && collisionSize != this.crabData.Number)
             {
                 Debug.Log("사이즈 다른 게");
             }
         }
+    }
+
+    IEnumerator delayCoroutine(float delay, Collider2D collision)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+        Destroy(collision.gameObject);
+        //gameObject.GetComponent<Renderer>().enabled = false;
+        //collision.gameObject.GetComponent<Renderer>().enabled = false;
     }
 }
