@@ -11,14 +11,14 @@ public class WhalePattern : MonoBehaviour
     private bool isRight;
 
     private SpriteRenderer spriteRenderer;
+    private GameObject visual;
 
     public float minX;
     public float maxX;
     public float minY;
     public float maxY;
 
-    [SerializeField] private float speed = 0.01f;
-
+    [SerializeField] private float speed = 0.05f;
 
     public Vector2 targetPos;
     public Vector2 spawnPos;
@@ -29,6 +29,7 @@ public class WhalePattern : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         col = GetComponentInChildren<Collider2D>();
+        visual = transform.Find("Visual").gameObject;
         WhaleSpawn();
     }
 
@@ -67,7 +68,9 @@ public class WhalePattern : MonoBehaviour
 
     public void Flip()
     {
-        spriteRenderer.flipX = !isRight;
+        //spriteRenderer.flipX = !isRight;
+        int flipx = isRight == true ? 1 : -1;
+        visual.transform.localScale = new Vector3(flipx, 1,1);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
