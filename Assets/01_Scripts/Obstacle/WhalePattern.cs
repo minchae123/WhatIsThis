@@ -68,7 +68,6 @@ public class WhalePattern : MonoBehaviour
 
     public void Flip()
     {
-        //spriteRenderer.flipX = !isRight;
         int flipx = isRight == true ? 1 : -1;
         visual.transform.localScale = new Vector3(flipx, 1,1);
     }
