@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1162793330}
   - component: {fileID: 1162793332}
   - component: {fileID: 1162793331}
+  - component: {fileID: 1711845518}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1162793329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8682328731450643090}
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c304c5e00d201fe4b80a0bf00d05c8b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3870baedb040aba408ee55e4d77f5c41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,6 +107,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &1711845518
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162793329}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.0803288, y: -0.7512607}
+  m_Size: {x: 1.8493633, y: 1.1029807}
+  m_Direction: 1
 --- !u!1 &8682328731450643088
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +135,7 @@ GameObject:
   - component: {fileID: 8682328731450643101}
   m_Layer: 0
   m_Name: Whale
-  m_TagString: Untagged
+  m_TagString: Crab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,5 +174,6 @@ MonoBehaviour:
   maxX: 7
   minY: -6
   maxY: 6
+  speed: 0.02
   targetPos: {x: 0, y: 0}
   spawnPos: {x: 0, y: 0}
