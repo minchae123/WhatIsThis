@@ -21,8 +21,7 @@ public class CrabManager : MonoBehaviour
     public int CrabLayer;
     public CrabSO[] CrabData;
 
-    [SerializeField]
-    private GameObject crabPrefab;
+    public GameObject crabPrefab;
 
     void Awake()
     {
