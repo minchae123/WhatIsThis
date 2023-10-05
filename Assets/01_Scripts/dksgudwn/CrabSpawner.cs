@@ -21,7 +21,7 @@ public class CrabSpawner : MonoBehaviour
             obj.GetComponent<SpriteRenderer>().sprite = CrabManager.Instance.CrabData[0].Image;
             //obj.GetComponent<Crab>().crabData.Number = CrabManager.Instance.CrabData[0].Number;
 
-            int spawnTime = Random.Range(3, 5);
+            int spawnTime = Random.Range(1, 3);
             yield return new WaitForSeconds(spawnTime);
         }
     }
