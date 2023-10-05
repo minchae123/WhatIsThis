@@ -44,6 +44,7 @@ public class Obstacle : MonoBehaviour
 					bobber.ResetPos();
 					collision.gameObject.transform.parent = transform;
 					Destroy(collision.GetComponent<Dragger>());
+					Destroy(collision.GetComponent<Crab>());
 					break;
 			}
 		}
