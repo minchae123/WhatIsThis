@@ -325,8 +325,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dd9aade487198444b51cf2b23af31c5, type: 2}
   - {fileID: 11400000, guid: 280d23cb2aedb54458585d5b246cbe10, type: 2}
   - {fileID: 11400000, guid: efd7af15f36dc9846a8760ede9d61111, type: 2}
-  - {fileID: 11400000, guid: efd7af15f36dc9846a8760ede9d61111, type: 2}
-  - {fileID: 11400000, guid: efd7af15f36dc9846a8760ede9d61111, type: 2}
+  - {fileID: 11400000, guid: 7711cf9ddb0b27747a78076996ac50e5, type: 2}
+  - {fileID: 11400000, guid: 7711cf9ddb0b27747a78076996ac50e5, type: 2}
   crabPrefab: {fileID: 2011379218181107960, guid: a4ff0390d1108ac4f81892929e221f63, type: 3}
 --- !u!4 &1170821286
 Transform:
