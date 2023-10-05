@@ -1462,7 +1462,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -36
-  m_Sprite: {fileID: 21300000, guid: b5ad261e1a6103b4b86af1660156b3c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5d4079bfc20cbec499bcf40cfaa5403f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1890,6 +1890,10 @@ PrefabInstance:
     - target: {fileID: 1983429531227339767, guid: b43a8e621ab53fa44abb0155eba32df8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204454682215151636, guid: b43a8e621ab53fa44abb0155eba32df8, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43a8e621ab53fa44abb0155eba32df8, type: 3}
@@ -2508,6 +2512,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 175655337}
     m_Modifications:
+    - target: {fileID: 1162793329, guid: 179f98707a00f0a4db9ba6bef1a2946c, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1711845518, guid: 179f98707a00f0a4db9ba6bef1a2946c, type: 3}
       propertyPath: m_IsTrigger
       value: 1
