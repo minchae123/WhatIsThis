@@ -11,4 +11,8 @@ public class ObstacleSpawner : MonoBehaviour
         
     }
 
+	private void Update()
+	{
+		
+	}
 }
