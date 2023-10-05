@@ -22,7 +22,16 @@ public class Crab : MonoBehaviour
     {
         if (ColliderCheck)
         {
-            int collisionSize = collision.gameObject.GetComponent<Crab>().crabData.Number;
+            Crab crab = collision.gameObject.GetComponent<Crab>();
+
+            // Crab 컴포넌트가 null인 경우 처리
+            if (crab == null)
+            {
+                Debug.Log("Crab 컴포넌트를 찾을 수 없습니다.");
+                return; // 이후 코드를 실행하지 않고 메서드를 빠져나갑니다.
+            }
+
+            int collisionSize = crab.crabData.Number;
             if (collision.tag == "Crab" && collisionSize == this.crabData.Number)
             {
                 CrabManager.Instance.MergeCrab(collisionSize + 1, transform.position);
@@ -34,6 +43,10 @@ public class Crab : MonoBehaviour
             //{
             //    Debug.Log("사이즈 다른 게");
             //}
+            else if (collision.tag == "Obstacle")
+            {
+                Debug.Log("Obstacle");
+            }
             ColliderCheck = false;
         }
     }
