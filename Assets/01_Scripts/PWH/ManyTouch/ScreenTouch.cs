@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 
 public class ScreenTouch : MonoBehaviour
 {
@@ -70,9 +71,10 @@ public class ScreenTouch : MonoBehaviour
                 Sequence s = DOTween.Sequence();
                 s.Kill();
 
-                if (timeLimit == 0)
+                if (timeLimit <= 0)
                 {
-                    //미니게임이 끝났을 때 해야할 것
+                    transform.GetComponent<Button>().interactable = false;
+                    StopAllCoroutines();
                 }
             }
         }

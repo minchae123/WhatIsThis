@@ -1715,7 +1715,7 @@ MonoBehaviour:
   text: {fileID: 1719716003}
   Score: {fileID: 1886249547}
   ease: 0
-  timeLimit: 20
+  timeLimit: 5
   totalScore: 0
 --- !u!114 &1912556975
 MonoBehaviour:
