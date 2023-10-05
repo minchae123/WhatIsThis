@@ -41,7 +41,7 @@ public class Bobber : MonoBehaviour
         }
     }
 
-    private void Move()
+    public void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, CurrentPointPosition, MoveSpeed * Time.deltaTime);
     }
@@ -76,6 +76,7 @@ public class Bobber : MonoBehaviour
     {
         _randomCnt = Random.Range(5,7);
         _currentWayPointIndex = 0;
+    
     }
 
     private IEnumerator RepeatPos()
@@ -86,4 +87,10 @@ public class Bobber : MonoBehaviour
         RepeatOnce = false;
         ResetPos();
     }
+
+    public void Catch()
+	{
+        ResetPos();
+
+	}
 }

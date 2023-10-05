@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CrabSpawner : MonoBehaviour
 {
+    public float spawnTimeMin;
+    public float spawnTimeMax;
     void Start()
     {
         StartCoroutine(RandSpawn());
@@ -21,7 +23,7 @@ public class CrabSpawner : MonoBehaviour
             obj.GetComponent<SpriteRenderer>().sprite = CrabManager.Instance.CrabData[0].Image;
             //obj.GetComponent<Crab>().crabData.Number = CrabManager.Instance.CrabData[0].Number;
 
-            int spawnTime = Random.Range(1, 3);
+            float spawnTime = Random.Range(spawnTimeMin, spawnTimeMax);
             yield return new WaitForSeconds(spawnTime);
         }
     }
