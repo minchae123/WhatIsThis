@@ -5,8 +5,10 @@ using UnityEngine.UIElements;
 
 public class MainUiController : MonoBehaviour
 {
-    [SerializeField]
-    private string[] Explain;
+    [Header("이름")]
+    [SerializeField] private string[] Name;
+    [Header("설명")]
+    [SerializeField] private string[] Explain;
     private UIDocument _doc;
 
     // Start is called before the first frame update
@@ -18,6 +20,7 @@ public class MainUiController : MonoBehaviour
         {
             VisualElement visual = _doc.rootVisualElement.Q<VisualElement>($"image{i}");
             Label label = visual.Q<Label>($"explain{i}");
+            label.text = Name[i - 1];
             visual.RegisterCallback<ClickEvent>(evt => ClickList(evt, label));
         }
     }
@@ -25,7 +28,7 @@ public class MainUiController : MonoBehaviour
     private void ClickList(ClickEvent evt, Label label)
     {
         string name = label.name;
-        int idx = (int)name[^1] - '0';
+        int idx = (int)name[^1] - '1';
         string print = Explain[idx];
         label.text = print;
     }
