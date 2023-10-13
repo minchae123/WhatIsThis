@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/01_Scripts/PWH/Dictionaly/UiToolkit/ScrolUss.uss?fileID=7433441132597879392&amp;guid=08bf05202ecdc18499692e11f838d59e&amp;type=3#ScrolUss" />
+    <ui:VisualElement style="height: 1920px;">
+        <ui:ScrollView style="height: 1920px;">
+            <ui:VisualElement name="image1" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EA%B7%80%EC%97%AC%EC%9A%B4%20%EC%86%8C%EB%9D%BC%EA%B2%8C.png?fileID=2800000&amp;guid=3b6743a85d4b5ea4689649492d00f38b&amp;type=3#귀여운 소라게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain1" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image2" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EC%9D%B8%EC%82%AC%20%EC%86%8C%EB%9D%BC%EA%B2%8C.png?fileID=2800000&amp;guid=6346a7dfb9f395b4d813a68090e86b2a&amp;type=3#인사 소라게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain2" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image3" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EB%AF%B8%EB%8B%88%EA%B2%8C.png?fileID=2800000&amp;guid=c1a044167b14f4149a8eb60c4dc90534&amp;type=3#미니게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain3" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image4" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%ED%82%B9%ED%81%AC%EB%9E%A9.png?fileID=2800000&amp;guid=fa4696f6d9e9dd64a8607487baa15b3e&amp;type=3#킹크랩&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain4" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image5" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EB%9E%8D%EC%8A%A4%ED%83%80.png?fileID=2800000&amp;guid=b4995e744aa4f05478ddc39cde304af4&amp;type=3#랍스타&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain5" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image6" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EC%A1%B0%EA%B2%8C.png?fileID=2800000&amp;guid=9ba59901d4789204cb9a8c1b2170a5e2&amp;type=3#조게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain6" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image7" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EC%8B%9C%EA%B3%84.png?fileID=2800000&amp;guid=52d0c3c229e5b404d8cbfe0c1e04c6c0&amp;type=3#시계&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain7" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image8" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EB%98%A5%EA%B2%8C.png?fileID=2800000&amp;guid=1e75a88c9c5f7514d8b370d07c42f1fd&amp;type=3#똥게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain8" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image9" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EC%84%B8%EA%B2%8C.png?fileID=2800000&amp;guid=c8ebc0d344a98b04e85282800073ae4f&amp;type=3#세게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain9" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="image10" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EB%AC%B4%EC%A7%80%EA%B2%8C.png?fileID=2800000&amp;guid=a4c56de8884647d4fab75a767ae3d93a&amp;type=3#무지게&apos;);">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="explain10" class="explain" style="background-color: rgba(255, 255, 255, 0); -unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>
