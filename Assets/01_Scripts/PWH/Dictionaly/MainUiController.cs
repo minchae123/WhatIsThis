@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,9 +28,9 @@ public class MainUiController : MonoBehaviour
 
     private void ClickList(ClickEvent evt, Label label)
     {
-        string name = label.name;
-        int idx = (int)name[^1] - '1';
-        string print = Explain[idx];
+        string name = Regex.Replace(label.name, @"\D", ""); //str에 문자열중 일반문자를 ""공백문자로 대체한다 
+        int _num = int.Parse(name);
+        string print = Explain[_num - 1];
         label.text = print;
     }
 
