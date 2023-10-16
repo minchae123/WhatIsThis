@@ -76,7 +76,6 @@ public class Bobber : MonoBehaviour
     {
         _randomCnt = Random.Range(5,7);
         _currentWayPointIndex = 0;
-    
     }
 
     private IEnumerator RepeatPos()
