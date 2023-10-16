@@ -18,9 +18,9 @@ public class CrabSpawner : MonoBehaviour
             int randX = Random.Range(-2, 2);
             int randY = Random.Range(-4, 4);
             Vector2 randPos = new Vector2(randX, randY);
-            GameObject obj = Instantiate(CrabManager.Instance.crabPrefab, randPos, Quaternion.identity);
-            obj.GetComponent<Crab>().crabData = CrabManager.Instance.CrabData[0];
-            obj.GetComponent<SpriteRenderer>().sprite = CrabManager.Instance.CrabData[0].Image;
+            Crab obj = Instantiate(CrabManager.Instance.crabPrefab, randPos, Quaternion.identity);
+            obj.crabData = CrabManager.Instance.CrabData[0];
+            obj.gameObject.GetComponent<SpriteRenderer>().sprite = CrabManager.Instance.CrabData[0].Image;
             //obj.GetComponent<Crab>().crabData.Number = CrabManager.Instance.CrabData[0].Number;
 
             float spawnTime = Random.Range(spawnTimeMin, spawnTimeMax);
