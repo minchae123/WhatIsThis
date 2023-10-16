@@ -21,7 +21,7 @@ public class CrabManager : MonoBehaviour
     public int CrabLayer;
     public CrabSO[] CrabData;
 
-    public GameObject crabPrefab;
+    public Crab crabPrefab;
 
     void Awake()
     {
@@ -41,9 +41,9 @@ public class CrabManager : MonoBehaviour
     }
     public void MergeCrab(int v, Vector3 pos)
     {
-        crabPrefab.GetComponent<Crab>().crabData = CrabData[v];
+        crabPrefab.crabData = CrabData[v];
         print("»ý¼º");
-        GameObject crab = Instantiate(crabPrefab, transform.position, Quaternion.identity);
+        Crab crab = Instantiate(crabPrefab, transform.position, Quaternion.identity);
         crab.transform.position = pos;
     }
 }
