@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b9d1cfd5aa46a4db0b45556c1f1f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explain:
+  Name:
   - "\uADC0\uC5EC\uC6B4 \uC18C\uB77C\uAC8C"
   - "\uC778\uC0AC \uC18C\uB77C\uAC8C"
   - "\uBBF8\uB2C8\uAC8C"
@@ -247,6 +247,17 @@ MonoBehaviour:
   - "\uB625\uAC8C"
   - "\uC138\uAC8C"
   - "\uBB34\uC9C0\uAC8C"
+  Explain:
+  - "\uCE74\uC640\uC774"
+  - "\uD558\uC774"
+  - "\uC2A4\uBAB0"
+  - "\uC554\uC5B4\uD0B9"
+  - "\uB77D\uC2A4\uD0C0"
+  - "\uC2E4\uC2E4 \uC870\uAC8C"
+  - "\uC5EC\uBCF4\uC2DC\uAC8C"
+  - "\uAC1C\uB625\uAC8C"
+  - "\uBCC4\uC774 \uC138\uAC8C!!!"
+  - "\uBB34\uC9C0\uBB34\uC9C0\uAC8C"
 --- !u!114 &1415290383
 MonoBehaviour:
   m_ObjectHideFlags: 0
