@@ -1,19 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
+using UnityEngine.UI;
 
 public class StoreUI : MonoBehaviour
 {
     private GameObject _content;
     public GameObject Item;
+    List<GameObject> Items = new List<GameObject>();
+    [SerializeField]
+    List<CrabSO> crabSOs = new List<CrabSO>();
+    
     private void Start()
     {
         _content = GameObject.Find("Content");
-        print(_content);
-        Instantiate(Item).transform.position = _content.transform.position;
-        print(Item.transform.position);
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = Instantiate(Item);
+            obj.transform.parent = _content.transform;
+
+            Image image = obj.transform.Find("ImageSprite").GetComponent<Image>();
+
+            image.sprite = crabSOs[i].Image;
+
+            Items.Add(obj);
+        }
     }
 }
