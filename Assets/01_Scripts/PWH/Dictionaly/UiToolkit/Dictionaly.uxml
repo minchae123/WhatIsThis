@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/01_Scripts/PWH/Dictionaly/UiToolkit/ScrolUss.uss?fileID=7433441132597879392&amp;guid=08bf05202ecdc18499692e11f838d59e&amp;type=3#ScrolUss" />
-    <ui:VisualElement name="VisualElement" style="height: 1920px; background-color: rgb(86, 122, 197);">
+    <ui:VisualElement name="VisualElement" style="height: 1920px; background-color: rgba(86, 122, 197, 0);">
         <ui:ScrollView name="ScrollView" style="height: 1920px; flex-grow: 1;">
             <ui:VisualElement name="image1" class="image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EA%B7%80%EC%97%AC%EC%9A%B4%20%EC%86%8C%EB%9D%BC%EA%B2%8C.png?fileID=2800000&amp;guid=3b6743a85d4b5ea4689649492d00f38b&amp;type=3#귀여운 소라게&apos;);">
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="explain1" class="explain" style="-unity-font-style: bold; font-size: 48px; -unity-text-align: middle-center;" />
