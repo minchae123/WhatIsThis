@@ -17,6 +17,12 @@ public class MainUiController : MonoBehaviour
     {
         _doc = GetComponent<UIDocument>();
 
+        //VisualElement visuals = _doc.rootVisualElement.Q<VisualElement>($"VisualElement");
+        //Debug.Log("sdfdgfh");
+        //ScrollView sView = visuals.Q<ScrollView>("ScrollView");
+        //sView.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+        
+
         for (int i = 1; i <= 10; i++)
         {
             VisualElement visual = _doc.rootVisualElement.Q<VisualElement>($"image{i}");
