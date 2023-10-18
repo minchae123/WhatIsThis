@@ -12,4 +12,8 @@ public class CrabSO : ScriptableObject
     [SerializeField]
     private Sprite image;
     public Sprite Image { get { return image; } }
+
+    [SerializeField]
+    private int price;
+    public int Price { get { return price; } }
 }
