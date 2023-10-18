@@ -5,13 +5,23 @@
     margin-bottom: 30px;
     width: 200px;
     height: 200px;
-    background-color: rgba(255, 255, 255, 255);
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     -unity-background-scale-mode: stretch-to-fill;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .explain {
     flex-grow: 1;
     translate: 250px 0;
     width: 750px;
+    background-color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 255);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
