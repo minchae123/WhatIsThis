@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b064632352baa2f49b39e6bb7c4f9327, type: 3}
+  m_Name: InitPoolList
+  m_EditorClassIdentifier: 
+  list:
+  - prefab: {fileID: 2011379218181107963, guid: c800382025f50d24595f4d4912d9d51e, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: be73522f6ec23dc41b2ac9e9acaa9547, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 616155be94f86a847b92a4802e3642b2, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: eaf28420ed8ec474d8eda7755c9b4f20, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 96f939c3bf8647c418c07ed9d34d8d47, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 7e5ae29ae14e2db41ae9da08e8f37e77, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 2aed94693e9be9b48b568ce29b1fd310, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 54cf95de94b909042992547afc59e19d, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 447678b8187b1dc46a72a1791712df73, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: a0e7bbc1241907e44be796fbb41fde71, type: 3}
+    poolCount: 10
+  - prefab: {fileID: 2011379218181107963, guid: 7bfcdb8acf6e98e44adaa79533b7a965, type: 3}
+    poolCount: 10

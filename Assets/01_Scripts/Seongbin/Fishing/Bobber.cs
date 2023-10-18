@@ -41,7 +41,7 @@ public class Bobber : MonoBehaviour
         }
     }
 
-    private void Move()
+    public void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, CurrentPointPosition, MoveSpeed * Time.deltaTime);
     }
@@ -86,4 +86,10 @@ public class Bobber : MonoBehaviour
         RepeatOnce = false;
         ResetPos();
     }
+
+    public void Catch()
+	{
+        ResetPos();
+
+	}
 }
