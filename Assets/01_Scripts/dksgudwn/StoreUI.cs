@@ -10,16 +10,20 @@ public class StoreUI : MonoBehaviour
     List<GameObject> Items = new List<GameObject>();
     [SerializeField]
     List<CrabSO> crabSOs = new List<CrabSO>();
-    
+
+    private void Awake()
+    {
+        _content = transform.Find("ShopItems/ScrollContent/Content").gameObject;
+    }
+
     private void Start()
     {
-        _content = GameObject.Find("Content");
         for (int i = 0; i < 10; i++)
         {
             GameObject obj = Instantiate(Item);
             obj.transform.parent = _content.transform;
 
-            Image image = obj.transform.Find("ImageSprite").GetComponent<Image>();
+            Image image = obj.transform.Find("Background/ImageSprite").GetComponent<Image>();
 
             image.sprite = crabSOs[i].Image;
 
