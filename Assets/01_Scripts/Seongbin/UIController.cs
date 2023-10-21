@@ -35,7 +35,8 @@ public class UIController : MonoBehaviour
     private void OnShopingButtonClicked(ClickEvent evt)
     {
         Debug.Log("shoping");
-       
+
+
     }
     private void OnDictionaryButtonClicked(ClickEvent evt)
     {
