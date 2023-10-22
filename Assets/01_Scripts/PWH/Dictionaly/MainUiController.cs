@@ -40,7 +40,6 @@ public class MainUiController : MonoBehaviour
         string name = Regex.Replace(label.name, @"\D", ""); //str에 문자열중 일반문자를 ""공백문자로 대체한다 
         int _num = int.Parse(name);
 
-            Debug.Log(name);
         if (keyBtn.ContainsKey(name))
         {
             keyBtn[name] = !keyBtn[name];
