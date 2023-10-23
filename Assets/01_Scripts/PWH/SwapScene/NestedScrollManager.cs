@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class NestedScrollManager : MonoBehaviour
 {
-    public Scrollbar scrollbar;
-    public Transform contentTr;
+    [SerializeField] private Scrollbar scrollbar;
+    [SerializeField] private Transform contentTr;
+    [SerializeField] private GameObject[] MenuView;
 
-    public Slider tabSlider;
-    public RectTransform[] BtnRect, BtnImageRect;
+    [SerializeField] private Slider tabSlider;
+    [SerializeField] private RectTransform[] BtnRect, BtnImageRect;
 
     const int SIZE = 4;
     float[] pos = new float[SIZE];
     float distance, curPos, targetPos;
-    bool isDrag;
     int targetIndex;
 
 
@@ -39,38 +39,38 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
     }
 
 
-    public void OnBeginDrag(PointerEventData eventData) => curPos = SetPos();
+    //public void OnBeginDrag(PointerEventData eventData) => curPos = SetPos();
 
-    public void OnDrag(PointerEventData eventData) => isDrag = true;
+    //public void OnDrag(PointerEventData eventData) => isDrag = true;
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        isDrag = false;
-        targetPos = SetPos();
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
+    //isDrag = false;
+    //targetPos = SetPos();
 
-        // 절반거리를 넘지 않아도 마우스를 빠르게 이동하면
-        if (curPos == targetPos)
-        {
-            // ← 으로 가려면 목표가 하나 감소
-            if (eventData.delta.x > 18 && curPos - distance >= 0)
-            {
-                --targetIndex;
-                targetPos = curPos - distance;
-            }
+    //// 절반거리를 넘지 않아도 마우스를 빠르게 이동하면
+    //if (curPos == targetPos)
+    //{
+    //    // ← 으로 가려면 목표가 하나 감소
+    //    if (eventData.delta.x > 18 && curPos - distance >= 0)
+    //    {
+    //        --targetIndex;
+    //        targetPos = curPos - distance;
+    //    }
 
-            // → 으로 가려면 목표가 하나 증가
-            else if (eventData.delta.x < -18 && curPos + distance <= 1.01f)
-            {
-                ++targetIndex;
-                targetPos = curPos + distance;
-            }
-        }
+    //    // → 으로 가려면 목표가 하나 증가
+    //    else if (eventData.delta.x < -18 && curPos + distance <= 1.01f)
+    //    {
+    //        ++targetIndex;
+    //        targetPos = curPos + distance;
+    //    }
+    //}
 
-        VerticalScrollUp();
-    }
+    //VerticalScrollUp();
+    //}
 
     void VerticalScrollUp()
-    { 
+    {
         // 목표가 수직스크롤이고, 옆에서 옮겨왔다면 수직스크롤을 맨 위로 올림
         for (int i = 0; i < SIZE; i++)
             if (contentTr.GetChild(i).GetComponent<ScrollScript>() && curPos != pos[i] && targetPos == pos[i])
@@ -82,15 +82,11 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
     {
         tabSlider.value = scrollbar.value;
 
-        if (!isDrag)
-        {
-            scrollbar.value = Mathf.Lerp(scrollbar.value, targetPos, 0.1f);
+        scrollbar.value = Mathf.Lerp(scrollbar.value, targetPos, 0.1f);
 
-            // 목표 버튼은 크기가 커짐
-            for (int i = 0; i < SIZE; i++) BtnRect[i].sizeDelta = new Vector2(i == targetIndex ? 360 : 180, BtnRect[i].sizeDelta.y);
-        }
-
-
+        // 목표 버튼은 크기가 커짐
+        for (int i = 0; i < SIZE; i++) BtnRect[i].sizeDelta = new Vector2(i == targetIndex ? 360 : 180, BtnRect[i].sizeDelta.y);
+        
         if (Time.time < 0.1f) return;
 
         for (int i = 0; i < SIZE; i++)
@@ -121,5 +117,16 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
         targetIndex = n;
         targetPos = pos[n];
         VerticalScrollUp();
+            
+        CheckBtnIdx(targetIndex);
+    }
+
+    private void CheckBtnIdx(int Btnidx)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            MenuView[i].SetActive(false);
+        }
+        MenuView[Btnidx].SetActive(true);
     }
 }
