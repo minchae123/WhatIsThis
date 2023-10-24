@@ -21,7 +21,9 @@ public class StoreUITK : MonoBehaviour
     private void Start()
     {
         _root = _document.rootVisualElement;
+        _listView = _root.Q<ListView>("ListView");
+
         VisualElement it = item.Instantiate();
-        _listView.Add(it);
+        //_listView.makeItem();
     }
 }
