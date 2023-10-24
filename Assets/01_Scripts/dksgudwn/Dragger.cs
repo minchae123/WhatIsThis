@@ -16,9 +16,15 @@ public class Dragger : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        //this.enabled = true;
+    }
+
     private void OnMouseDrag()
     {
         transform.position = GetMousePos();
+        transform.parent = null;
         _spriteRenderer.sortingOrder = 10;
     }
     private void OnMouseUp()
