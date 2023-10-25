@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-direction: row; background-color: rgb(183, 118, 118);">
+        <ui:VisualElement name="Image" style="background-image: url(&apos;project://database/Assets/02_Sprites/Dictionaly/%EA%B7%80%EC%97%AC%EC%9A%B4%20%EC%86%8C%EB%9D%BC%EA%B2%8C.png?fileID=2800000&amp;guid=3b6743a85d4b5ea4689649492d00f38b&amp;type=3#귀여운 소라게&apos;); width: 100px; height: 100px;" />
+        <ui:Label text="crab" display-tooltip-when-elided="true" name="explain" />
+        <ui:Label text="$10000000" display-tooltip-when-elided="true" name="Price" />
+        <ui:Button text="Button" display-tooltip-when-elided="true" />
+    </ui:VisualElement>
+</ui:UXML>
