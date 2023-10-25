@@ -13,11 +13,12 @@ public class NestedScrollManager : MonoBehaviour
     [SerializeField] private Slider tabSlider;
     [SerializeField] private RectTransform[] BtnRect, BtnImageRect;
 
+    [SerializeField] private GameObject gamemanager;
+
     const int SIZE = 4;
     float[] pos = new float[SIZE];
     float distance, curPos, targetPos;
     int targetIndex;
-
 
     void Start()
     {
@@ -69,14 +70,6 @@ public class NestedScrollManager : MonoBehaviour
     //VerticalScrollUp();
     //}
 
-    void VerticalScrollUp()
-    {
-        // 목표가 수직스크롤이고, 옆에서 옮겨왔다면 수직스크롤을 맨 위로 올림
-        for (int i = 0; i < SIZE; i++)
-            if (contentTr.GetChild(i).GetComponent<ScrollScript>() && curPos != pos[i] && targetPos == pos[i])
-                contentTr.GetChild(i).GetChild(1).GetComponent<Scrollbar>().value = 1;
-    }
-
 
     void Update()
     {
@@ -86,7 +79,7 @@ public class NestedScrollManager : MonoBehaviour
 
         // 목표 버튼은 크기가 커짐
         for (int i = 0; i < SIZE; i++) BtnRect[i].sizeDelta = new Vector2(i == targetIndex ? 360 : 180, BtnRect[i].sizeDelta.y);
-        
+
         if (Time.time < 0.1f) return;
 
         for (int i = 0; i < SIZE; i++)
@@ -116,17 +109,20 @@ public class NestedScrollManager : MonoBehaviour
         curPos = SetPos();
         targetIndex = n;
         targetPos = pos[n];
-        VerticalScrollUp();
-            
+
         CheckBtnIdx(targetIndex);
     }
 
     private void CheckBtnIdx(int Btnidx)
     {
-        for(int i = 0; i < 4; i++)
-        {
-            MenuView[i].SetActive(false);
-        }
-        MenuView[Btnidx].SetActive(true);
+        //for(int i = 0; i < 4; i++)
+        //{
+        //    MenuView[i].SetActive(false);
+        //}
+
+        if (Btnidx != 0)
+            gamemanager.SetActive(false);
+        else
+            gamemanager.SetActive(true);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,7 +24,12 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+    }
+
+    private void OnEnable()
+    {
         MakePool();
+        StartCoroutine(StartSpawn());
     }
 
     private void MakePool()
@@ -31,11 +37,6 @@ public class GameManager : MonoBehaviour
         PoolManager.Instance = new PoolManager(transform);
 
         poolingListSO.list.ForEach(p => PoolManager.Instance.CreatePool(p.prefab, p.poolCount)); //리스트에 있는 모든
-    }
-
-    private void Start()
-    {
-        StartCoroutine(StartSpawn());
     }
 
     IEnumerator StartSpawn()
