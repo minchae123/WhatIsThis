@@ -304,10 +304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edee5fa67fee9654fb3079b3a9908707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnTime: 5
-  _maxSpawnTime: 5
+  _minCastingTime: 5
+  _maxCastingTime: 5
   _minBiteTime: 1
   _maxBiteTime: 1
+  _isCasting: 0
+  _isBite: 0
+  _isCatch: 0
 --- !u!1 &126276102
 GameObject:
   m_ObjectHideFlags: 0

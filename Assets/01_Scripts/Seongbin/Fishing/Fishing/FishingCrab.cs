@@ -6,24 +6,61 @@ using UnityEngine;
 
 public class FishingCrab : MonoBehaviour
 {
-    [SerializeField] private float _minSpawnTime;
-    [SerializeField] private float _maxSpawnTime;
+    public enum FISHINGSTATE
+    {
+        NONE,
+        CASTING,
+        BITE,
+        CATCH
+    }
+
+    [SerializeField] private float _minCastingTime;
+    [SerializeField] private float _maxCastingTime;
 
     [SerializeField] private float _minBiteTime;
     [SerializeField] private float _maxBiteTime;
 
-    public bool _isCasting = false;
-    public bool _isBite = false;
-    public bool _isCatch = false;
+    public bool _isFishing;
 
+    public FISHINGSTATE curState;
 
-    private void Awake()
+    private void Start()
     {
-
     }
 
     private void Update()
     {
-      
+        Fishing();
+    }
+
+    void Fishing()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (curState == FISHINGSTATE.NONE) curState = FISHINGSTATE.CASTING;
+
+            else if (curState == FISHINGSTATE.BITE) curState = FISHINGSTATE.CATCH;
+        }
+
+        if (curState == FISHINGSTATE.CASTING && !_isFishing) StartCoroutine(FishingStart());
+    }
+
+    private IEnumerator FishingStart()
+    {
+        _isFishing = true;
+        //스타트 코루틴 랜덤초마다 캐스팅중일때 바이트가 되었다 없어지게
+
+        float biteTime = UnityEngine.Random.Range(_minBiteTime, _maxBiteTime);
+        float castingTime = UnityEngine.Random.Range(_minCastingTime, _maxCastingTime);
+
+        yield return new WaitForSeconds(castingTime);
+        curState = FISHINGSTATE.BITE;
+        yield return new WaitForSeconds(biteTime);
+
+        if (curState == FISHINGSTATE.CATCH)
+            curState = FISHINGSTATE.CATCH;
+        else
+            curState = FISHINGSTATE.NONE;
+        _isFishing = false;
     }
 }
