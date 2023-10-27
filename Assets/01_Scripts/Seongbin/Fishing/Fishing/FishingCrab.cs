@@ -57,7 +57,7 @@ public class FishingCrab : MonoBehaviour
         if (curState == FISHINGSTATE.CATCH)
             StartCoroutine(Catch());
         else
-            curState = FISHINGSTATE.NONE;
+            StartCoroutine(Miss());
         _isFishing = false;
     }
 
@@ -65,6 +65,13 @@ public class FishingCrab : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         curState = FISHINGSTATE.NONE;
-        //Crab Catch
+        //랜덤 돌려서 게 잡음
+    }
+
+    private IEnumerator Miss()
+    {
+        yield return null;
+        curState = FISHINGSTATE.NONE;
+        //놓침
     }
 }
