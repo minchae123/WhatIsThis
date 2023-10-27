@@ -23,10 +23,7 @@ public class FishingCrab : MonoBehaviour
     public bool _isFishing;
 
     public FISHINGSTATE curState;
-
-    private void Start()
-    {
-    }
+       
 
     private void Update()
     {
@@ -58,9 +55,16 @@ public class FishingCrab : MonoBehaviour
         yield return new WaitForSeconds(biteTime);
 
         if (curState == FISHINGSTATE.CATCH)
-            curState = FISHINGSTATE.CATCH;
+            StartCoroutine(Catch());
         else
             curState = FISHINGSTATE.NONE;
         _isFishing = false;
+    }
+
+    private IEnumerator Catch()
+    {
+        yield return new WaitForSeconds(1);
+        curState = FISHINGSTATE.NONE;
+        //Crab Catch
     }
 }
