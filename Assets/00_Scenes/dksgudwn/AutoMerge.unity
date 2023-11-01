@@ -2585,6 +2585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383508327}
+  - component: {fileID: 383508329}
   - component: {fileID: 383508328}
   m_Layer: 5
   m_Name: Text (TMP)
