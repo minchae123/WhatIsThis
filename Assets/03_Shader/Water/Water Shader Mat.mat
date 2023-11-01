@@ -38,8 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _SineAmp: 0.05
-    - _SineLength: 0.55
+    - _SineAmp: 0.055
+    - _SineLength: 0.5
     - _SineSpeed: 0.29
     - _YValue: 0
     m_Colors:

@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FishingCrab : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class FishingCrab : MonoBehaviour
         CATCH
     }
 
+    [Header("FishingSetting")]
     [SerializeField] private float _minCastingTime;
     [SerializeField] private float _maxCastingTime;
 
@@ -23,11 +26,128 @@ public class FishingCrab : MonoBehaviour
     public bool _isFishing;
 
     public FISHINGSTATE curState;
-       
+
+    [Header("Fishing")]
+    [SerializeField] private GameObject _fishingWindow;
+
+    [SerializeField] private Transform _topPivot;
+    [SerializeField] private Transform _bottomPivot;
+
+    [SerializeField] private Transform _crab;
+
+    private float _crabPosition;
+    private float _crabDestination;
+
+    private float _crabTimer;
+    [SerializeField] private float _timerMultiplicator = 3f;
+
+    private float _fishSpeed;
+    [SerializeField] private float _smoothMotion = 1f;
+
+    [SerializeField] private Transform _hook;
+    private float _hookPosition;
+    [SerializeField] private float _hookSize = 0.1f;
+    [SerializeField] private float _hookPower = 0.5f;
+    private float _hookProgress;
+    private float _hookPullVelocity;
+    [SerializeField] private float _hookPullPower = 0.01f;
+    [SerializeField] private float _hookGravityPower = 0.005f;
+    [SerializeField] private float _hookProgressDegradationPower = 1f;
+
+    [SerializeField] private SpriteRenderer _hookSpriteRenderer;
+
+    [SerializeField] private Transform _progressContainer;
+
+    [SerializeField] private float _failTimer = 10f;
+
+    private void Start()
+    {
+        Resize();
+    }
+
+    private void Resize()
+    {
+        Bounds b = _hookSpriteRenderer.bounds;
+        float ySize = b.size.y;
+        Vector3 ls = _hook.localScale;
+        float distance = Vector3.Distance(_topPivot.position, _bottomPivot.position);
+        ls.y = (distance / ySize * _hookSize);
+        _hook.localScale = ls;
+    }
 
     private void Update()
     {
         Fishing();
+
+        if (curState == FISHINGSTATE.CATCH)
+        {
+            _fishingWindow.SetActive(true);
+            MoveCrab();
+            Hook();
+            ProgressCheck();
+        }
+        else _fishingWindow.SetActive(false);
+    }
+
+    private void ProgressCheck()
+    {
+        Vector3 ls = _progressContainer.localScale;
+        ls.y = _hookProgress;
+        _progressContainer.localScale = ls;
+
+        float min = _hookPosition - _hookSize / 2;
+        float max = _hookPosition + _hookSize / 2;
+
+        if (min < _crabPosition && _crabPosition < max)
+            _hookProgress += _hookPower * Time.deltaTime;
+        else
+        {
+            _hookProgress -= _hookProgressDegradationPower * Time.deltaTime;
+
+            _failTimer -= Time.deltaTime;
+            if (_failTimer < 0)
+            {
+                _failTimer = 10;
+                StartCoroutine(Miss());
+            }
+        }
+
+        if (_hookProgress >= 1f)
+            StartCoroutine(Catch());
+
+        _hookProgress = Mathf.Clamp(_hookProgress, 0f, 1f);
+    }
+
+    private void Hook()
+    {
+        if (curState == FISHINGSTATE.CATCH && Input.GetMouseButton(0))
+        {
+            _hookPullVelocity += _hookPullPower * Time.deltaTime;
+        }
+        _hookPullVelocity -= _hookGravityPower * Time.deltaTime;
+
+        _hookPosition += _hookPullVelocity;
+
+        if (_hookPosition - _hookSize / 2 <= 0f && _hookPullVelocity < 0f ||
+            _hookPosition + _hookSize / 2 >= 1f && _hookPullVelocity > 0f)
+            _hookPullVelocity = 0;
+
+        _hookPosition = Mathf.Clamp(_hookPosition, _hookSize / 2, 1 - _hookSize / 2);
+        _hook.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _hookPosition);
+    }
+
+    private void MoveCrab()
+    {
+        _crabTimer -= Time.deltaTime;
+        if (_crabTimer < 0f)
+        {
+            _crabTimer = UnityEngine.Random.value * _timerMultiplicator;
+
+            _crabDestination = UnityEngine.Random.value;
+        }
+
+        _crabPosition = Mathf.SmoothDamp(_crabPosition, _crabDestination, ref _fishSpeed, _smoothMotion);
+        _crab.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _crabPosition);
     }
 
     void Fishing()
@@ -55,7 +175,8 @@ public class FishingCrab : MonoBehaviour
         yield return new WaitForSeconds(biteTime);
 
         if (curState == FISHINGSTATE.CATCH)
-            StartCoroutine(Catch());
+            Debug.Log("물엇다");
+            //낚시 진입으로 바꿔야됨
         else
             StartCoroutine(Miss());
         _isFishing = false;
@@ -63,15 +184,17 @@ public class FishingCrab : MonoBehaviour
 
     private IEnumerator Catch()
     {
-        yield return new WaitForSeconds(1);
+        Debug.Log("낚음");
         curState = FISHINGSTATE.NONE;
+        yield return null;
         //랜덤 돌려서 게 잡음
     }
 
     private IEnumerator Miss()
     {
-        yield return null;
+        Debug.Log("놓침");
         curState = FISHINGSTATE.NONE;
+        yield return null;
         //놓침
     }
 }
