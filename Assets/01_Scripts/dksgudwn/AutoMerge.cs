@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class AutoMerge : MonoBehaviour
 {
-    List<PoolableMono> EnableCrab;
+    public
+    List<GameObject> enableCrab;
 
     public void Auto()
     {
-        for (int i = 0; i < GameManager.Instance.poolingListSO.list.Count; i++)
+        enableCrab.Clear();
+        foreach (Transform child in transform)
         {
-
+            // 자식 오브젝트가 활성화되어 있으면 리스트에 추가
+            if (child.gameObject.activeSelf)
+            {
+                enableCrab.Add(child.gameObject);
+            }
         }
     }
 }

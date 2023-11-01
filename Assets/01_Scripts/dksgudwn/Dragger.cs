@@ -24,7 +24,7 @@ public class Dragger : MonoBehaviour
     private void OnMouseDrag()
     {
         transform.position = GetMousePos();
-        transform.parent = null;
+        //transform.parent = null;
         _spriteRenderer.sortingOrder = 10;
     }
     private void OnMouseUp()
