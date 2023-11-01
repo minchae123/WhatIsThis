@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AutoMerge : MonoBehaviour
 {
-    public
-    List<GameObject> enableCrab;
+    public List<GameObject> enableCrab;
 
     public void Auto()
     {
@@ -18,5 +17,6 @@ public class AutoMerge : MonoBehaviour
                 enableCrab.Add(child.gameObject);
             }
         }
+
     }
 }
