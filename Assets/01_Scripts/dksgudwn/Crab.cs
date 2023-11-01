@@ -36,7 +36,6 @@ public class Crab : PoolableMono
 
                 Crab nextCrab = PoolManager.Instance.Pop(GameManager.Instance.poolingListSO.list[++crabIndex].prefab.name) as Crab;
                 nextCrab.transform.position = transform.position;
-                StartCoroutine(delayCoroutine(10f, collision));
                 PoolManager.Instance.Push(this);
                 PoolManager.Instance.Push(crab);
             }
@@ -47,23 +46,6 @@ public class Crab : PoolableMono
             }
             ColliderCheck = false;
         }
-    }
-
-    private void MergeCrab(int v, Vector3 pos)
-    {
-        Crab crab = PoolManager.Instance.Pop("MainCrab") as Crab;
-        print(v);
-        crab.transform.position = pos;
-    }
-
-    IEnumerator delayCoroutine(float delay, Collider2D collision)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
-        Debug.Log("anjsi");
-        //gameObject.GetComponent<Renderer>().enabled = false;
-        //collision.gameObject.GetComponent<Renderer>().enabled = false;
     }
 
     public override void Init()
