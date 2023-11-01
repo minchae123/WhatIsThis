@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -11,6 +12,8 @@ public class MainUiController : MonoBehaviour
     [Header("Ό³Έν")]
     [SerializeField] private string[] Explain;
 
+    public PoolingListSO poolingListSO;
+
     private UIDocument _doc;
 
     Dictionary<string, bool> keyBtn = new Dictionary<string, bool>();
@@ -20,18 +23,21 @@ public class MainUiController : MonoBehaviour
     {
         _doc = GetComponent<UIDocument>();
 
-        //VisualElement visuals = _doc.rootVisualElement.Q<VisualElement>($"VisualElement");
-        //Debug.Log("sdfdgfh");
-        //ScrollView sView = visuals.Q<ScrollView>("ScrollView");
-        //sView.horizontalScrollerVisibility = ScrollerVisibility.Hidden;        
-
         for (int i = 1; i <= 10; i++)
         {
             VisualElement visual = _doc.rootVisualElement.Q<VisualElement>($"image{i}");
             Label label = visual.Q<Label>($"explain{i}");
             label.text = Name[i - 1];
             visual.RegisterCallback<ClickEvent>(evt => ClickList(evt, label));
+            visual.RegisterCallback<ClickEvent>(evt => Regist(visual));
+
+            poolingListSO.list[i].prefab = GameManager.
         }
+    }
+
+    private void Regist(VisualElement visual)
+    {
+
     }
 
     private void ClickList(ClickEvent evt, Label label)
