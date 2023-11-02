@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FishingCrab : MonoBehaviour
 {
+    #region FishingSetting
     public enum FISHINGSTATE
     {
         NONE,
@@ -23,11 +23,21 @@ public class FishingCrab : MonoBehaviour
     [SerializeField] private float _minBiteTime;
     [SerializeField] private float _maxBiteTime;
 
+    public bool _isThrow;
     public bool _isFishing;
 
     public FISHINGSTATE curState;
 
-    [Header("Fishing")]
+    private LineRenderer _fishingLine;
+
+    [SerializeField] private Transform _fishingRodPos;
+    [SerializeField] private Transform _bobber;
+
+    private Animator _anim;
+    #endregion
+
+    #region FishingBar
+    [Header("FishingBar")]
     [SerializeField] private GameObject _fishingWindow;
 
     [SerializeField] private Transform _topPivot;
@@ -59,6 +69,14 @@ public class FishingCrab : MonoBehaviour
     [SerializeField] private Transform _progressContainer;
 
     [SerializeField] private float _failTimer = 10f;
+    #endregion
+
+    #region SetUp
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+        _fishingLine = GetComponent<LineRenderer>();
+    }
 
     private void Start()
     {
@@ -74,7 +92,9 @@ public class FishingCrab : MonoBehaviour
         ls.y = (distance / ySize * _hookSize);
         _hook.localScale = ls;
     }
+    #endregion
 
+    #region MainLogic
     private void Update()
     {
         Fishing();
@@ -89,6 +109,97 @@ public class FishingCrab : MonoBehaviour
         else _fishingWindow.SetActive(false);
     }
 
+    void Fishing()
+    {
+        _fishingLine.SetPosition(0, _fishingRodPos.position);
+        _fishingLine.SetPosition(1, _bobber.position);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (curState == FISHINGSTATE.NONE) curState = FISHINGSTATE.CASTING;
+
+            else if (curState == FISHINGSTATE.CASTING) FishReset();
+
+            else if (curState == FISHINGSTATE.BITE) curState = FISHINGSTATE.CATCH;
+        }
+
+        //가만히 있어
+        if (curState == FISHINGSTATE.NONE)
+        {
+            _isThrow = false;
+            CatchBobber.resetGravity();
+            _bobber.transform.eulerAngles = Vector3.zero;
+            _bobber.position = new Vector3(_fishingRodPos.position.x, _fishingRodPos.position.y - 1);
+        }
+        //던졌어
+        if (curState == FISHINGSTATE.CASTING && !_isThrow)
+        {
+            _isThrow = true;
+            CatchBobber.bobberThrow();
+        }
+
+        //입질왔다
+        if (curState == FISHINGSTATE.BITE)
+            CatchBobber.crabBite();
+        
+        //물었다 
+        if (curState == FISHINGSTATE.CASTING && !_isFishing) StartCoroutine(FishingStart());
+    }
+
+    private IEnumerator FishingStart()
+    {
+        _isFishing = true;
+        //스타트 코루틴 랜덤초마다 캐스팅중일때 바이트가 되었다 없어지게
+
+        float biteTime = UnityEngine.Random.Range(_minBiteTime, _maxBiteTime);
+        float castingTime = UnityEngine.Random.Range(_minCastingTime, _maxCastingTime);
+
+
+        yield return new WaitForSeconds(castingTime);
+        curState = FISHINGSTATE.BITE;
+        yield return new WaitForSeconds(biteTime);
+
+        //if (curState == FISHINGSTATE.CATCH)
+        //{
+        //    Debug.Log("물엇다");
+        //    //낚시 진입으로 바꿔야됨
+        //}
+        //else
+        //    StartCoroutine(Miss());
+
+        if (curState != FISHINGSTATE.CATCH)
+            StartCoroutine(Miss());
+    }
+
+    private IEnumerator Catch()
+    {
+        _anim.SetTrigger("Catch");
+        Debug.Log("낚음");
+        CatchBobber.bobberUp();
+        FishReset();
+        yield return null;
+        //낚시찌 위로 올리고 로테이션 살짝 돌리고 1초 있다가 다시 원래대로
+    }
+
+    private IEnumerator Miss()
+    {
+        Debug.Log("놓침");
+        FishReset();
+        yield return null;
+        //놓침
+    }
+
+    private void FishReset()
+    {
+        _failTimer = 10;
+        _hookProgress = 0;
+        curState = FISHINGSTATE.NONE;
+        StopAllCoroutines();
+        _isFishing = false;
+    }
+    #endregion
+
+    #region FishingBar
     private void ProgressCheck()
     {
         Vector3 ls = _progressContainer.localScale;
@@ -107,7 +218,6 @@ public class FishingCrab : MonoBehaviour
             _failTimer -= Time.deltaTime;
             if (_failTimer < 0)
             {
-                _failTimer = 10;
                 StartCoroutine(Miss());
             }
         }
@@ -149,52 +259,5 @@ public class FishingCrab : MonoBehaviour
         _crabPosition = Mathf.SmoothDamp(_crabPosition, _crabDestination, ref _fishSpeed, _smoothMotion);
         _crab.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _crabPosition);
     }
-
-    void Fishing()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (curState == FISHINGSTATE.NONE) curState = FISHINGSTATE.CASTING;
-
-            else if (curState == FISHINGSTATE.BITE) curState = FISHINGSTATE.CATCH;
-        }
-
-        if (curState == FISHINGSTATE.CASTING && !_isFishing) StartCoroutine(FishingStart());
-    }
-
-    private IEnumerator FishingStart()
-    {
-        _isFishing = true;
-        //스타트 코루틴 랜덤초마다 캐스팅중일때 바이트가 되었다 없어지게
-
-        float biteTime = UnityEngine.Random.Range(_minBiteTime, _maxBiteTime);
-        float castingTime = UnityEngine.Random.Range(_minCastingTime, _maxCastingTime);
-
-        yield return new WaitForSeconds(castingTime);
-        curState = FISHINGSTATE.BITE;
-        yield return new WaitForSeconds(biteTime);
-
-        if (curState == FISHINGSTATE.CATCH)
-            Debug.Log("물엇다");
-            //낚시 진입으로 바꿔야됨
-        else
-            StartCoroutine(Miss());
-        _isFishing = false;
-    }
-
-    private IEnumerator Catch()
-    {
-        Debug.Log("낚음");
-        curState = FISHINGSTATE.NONE;
-        yield return null;
-        //랜덤 돌려서 게 잡음
-    }
-
-    private IEnumerator Miss()
-    {
-        Debug.Log("놓침");
-        curState = FISHINGSTATE.NONE;
-        yield return null;
-        //놓침
-    }
+    #endregion
 }
