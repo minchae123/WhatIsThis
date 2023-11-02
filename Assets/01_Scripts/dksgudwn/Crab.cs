@@ -38,8 +38,12 @@ public class Crab : PoolableMono
                 nextCrab.transform.position = transform.position;
                 PoolManager.Instance.Push(this);
                 PoolManager.Instance.Push(crab);
-            }
 
+                CrabSpawnManager.Instance.crabs.Remove(this);
+                CrabSpawnManager.Instance.crabs.Remove(crab);
+
+                CrabSpawnManager.Instance.crabs.Add(nextCrab);
+            }
             else if (collision.tag == "Obstacle")
             {
                 Debug.Log("Obstacle");
