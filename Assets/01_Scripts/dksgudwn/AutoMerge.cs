@@ -18,7 +18,10 @@ public class AutoMerge : MonoBehaviour
         //        enableCrab.Add(CrabSpawnManager.Instance.crabs[i].gameObject);
         //    }
         //}
-
+        for (int i = 0; i < CrabSpawnManager.Instance.crabs.Count; i++)
+        {
+            FindNum(CrabSpawnManager.Instance.crabs[i].name);
+        }
     }
 
     int FindNum(string str)
