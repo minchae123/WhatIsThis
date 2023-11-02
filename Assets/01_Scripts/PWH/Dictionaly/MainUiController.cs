@@ -31,7 +31,8 @@ public class MainUiController : MonoBehaviour
             visual.RegisterCallback<ClickEvent>(evt => ClickList(evt, label));
             visual.RegisterCallback<ClickEvent>(evt => Regist(visual));
 
-            poolingListSO.list[i].prefab = GameManager.
+            //if(poolingListSO.list[i].prefab.name == GameManager.Instance.CrabName)
+                
         }
     }
 

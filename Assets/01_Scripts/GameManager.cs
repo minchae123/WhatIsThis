@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public float spawnTimeMin;
     public float spawnTimeMax;
 
+    public string CrabName;
+
     private void Awake()
     {
         if (Instance != null)
@@ -50,8 +52,6 @@ public class GameManager : MonoBehaviour
             //obj.crabData = CrabManager.Instance.CrabData[0];
             //obj.gameObject.GetComponent<SpriteRenderer>().sprite = CrabManager.Instance.CrabData[0].Image;
             //obj.GetComponent<Crab>().crabData.Number = CrabManager.Instance.CrabData[0].Number;
-            obj.transform.position = randPos;
-
             float spawnTime = Random.Range(spawnTimeMin, spawnTimeMax);
             yield return new WaitForSeconds(spawnTime);
         }
