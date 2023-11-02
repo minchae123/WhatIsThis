@@ -9,8 +9,6 @@ public class CrabSpawnManager : MonoBehaviour
     public float spawnTimeMin;
     public float spawnTimeMax;
 
-    public bool isMerge = false;
-
     public List<Crab> crabs = new List<Crab>();
 
     private void Awake()
@@ -48,4 +46,5 @@ public class CrabSpawnManager : MonoBehaviour
             //리스트에 넣어주기
         }
     }
+
 }
