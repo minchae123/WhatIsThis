@@ -37,7 +37,7 @@ public class FishingCrab : MonoBehaviour
     private Animator _anim;
     #endregion
 
-    #region FishingBar
+    #region FishingBarSetting
     [Header("FishingBar")]
     [SerializeField] private GameObject _fishingWindow;
 
@@ -165,14 +165,6 @@ public class FishingCrab : MonoBehaviour
         curState = FISHINGSTATE.BITE;
         yield return new WaitForSeconds(biteTime);
 
-        //if (curState == FISHINGSTATE.CATCH)
-        //{
-        //    Debug.Log("물엇다");
-        //    //낚시 진입으로 바꿔야됨
-        //}
-        //else
-        //    StartCoroutine(Miss());
-
         if (curState != FISHINGSTATE.CATCH)
             StartCoroutine(Miss());
     }
@@ -187,7 +179,7 @@ public class FishingCrab : MonoBehaviour
         _anim.SetBool("Catch", false);
         yield return new WaitForSeconds(.1f);
         FishReset();
-        //낚시찌 위로 올리고 로테이션 살짝 돌리고 1초 있다가 다시 원래대로
+        //낚시찌 위로 올리고 로테이션 살짝 돌리고 1초 있다가 다시 원래대로z
     }
 
     private IEnumerator Miss()
