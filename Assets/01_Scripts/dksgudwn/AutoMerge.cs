@@ -9,14 +9,13 @@ public class AutoMerge : MonoBehaviour
     public void Auto()
     {
         enableCrab.Clear();
-        foreach (Transform child in transform)
+        for (int i = 0; i < CrabSpawnManager.Instance.crabs.Count; i++)
         {
-            // 자식 오브젝트가 활성화되어 있으면 리스트에 추가
-            if (child.gameObject.activeSelf)
+            // 활성화되어 있으면 리스트에 추가
+            if (CrabSpawnManager.Instance.crabs[i].gameObject.activeSelf)
             {
-                enableCrab.Add(child.gameObject);
+                enableCrab.Add(CrabSpawnManager.Instance.crabs[i].gameObject);
             }
         }
-
     }
 }

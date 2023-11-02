@@ -32,18 +32,15 @@ public class Crab : PoolableMono
             int collisionSize = crab.crabData.Number;
             if (collision.tag == "Crab" && collisionSize == this.crabData.Number)
             {
-                int crabIndex = crabData.Number;
-
-                Crab nextCrab = PoolManager.Instance.Pop(GameManager.Instance.poolingListSO.list[++crabIndex].prefab.name) as Crab;
-                nextCrab.transform.position = transform.position;
-                PoolManager.Instance.Push(this);
-                PoolManager.Instance.Push(crab);
+                CrabSpawnManager.Instance.isMerge = false;
             }
-
             else if (collision.tag == "Obstacle")
             {
                 Debug.Log("Obstacle");
             }
+            else
+                CrabSpawnManager.Instance.isMerge = false;
+
             ColliderCheck = false;
         }
     }
