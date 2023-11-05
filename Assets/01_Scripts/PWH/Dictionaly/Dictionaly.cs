@@ -11,7 +11,6 @@ public class Dictionaly : MonoBehaviour
     [SerializeField] private GameObject BtnImage;
     [SerializeField] private Transform contentTr;
     [SerializeField] private GameObject explain;
-    [SerializeField] private RectTransform rty;
 
     private readonly string _imageName = "Visual";
 
@@ -40,17 +39,12 @@ public class Dictionaly : MonoBehaviour
     {
         Debug.Log("asfghjhgfwerthvc");
 
-        //explain.transform.position = transform.position;
+        explain = GameObject.Find("Explain");
 
-        //explain.transform.DOScale(new Vector2(800, 1400), 1);
-        //explain.transform.DOMove(Vector2.zero, 1);
-
-        var seq = DOTween.Sequence();
-
-        // DOScale 의 첫 번째 파라미터는 목표 Scale 값, 두 번째는 시간입니다.
-        seq.Append(explain.transform.DOScale(1.1f, 0.2f));
-        seq.Append(explain.transform.DOScale(1f, 0.1f));
-
-        seq.Play();
+        explain.GetComponent<RectTransform>().DOSizeDelta(new Vector2(800, 1400), 1);
+        //explain.transform.DOScale(new Vector3(800, 1400, 1), 1);
+        explain.GetComponent<RectTransform>().DOAnchorPosX(transform.position.x, 1);
+        explain.GetComponent<RectTransform>().DOAnchorPosX(transform.position.y, 1);
+        //explain.GetComponent<RectTransform>().DOAnchorPosX(0, 1);
     }
 }
