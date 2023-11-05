@@ -20,18 +20,22 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Multiple GameManager is running! Check!");
         }
         Instance = this;
+
     }
 
     private void OnEnable()
     {
         MakePool();
+    }
+    private void Start()
+    {
         CrabSpawnManager.Instance.StartSpawn();
     }
-
     private void MakePool()
     {
         PoolManager.Instance = new PoolManager(transform);
 
-        poolingListSO.list.ForEach(p => PoolManager.Instance.CreatePool(p.prefab, p.poolCount)); //리스트에 있는 모든
+        poolingListSO.list.ForEach(p => PoolManager
+        .Instance.CreatePool(p.prefab, p.poolCount)); //리스트에 있는 모든
     }
 }
