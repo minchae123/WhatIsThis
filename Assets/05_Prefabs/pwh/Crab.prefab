@@ -274,4 +274,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8980231504208445219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2840691103302833132, guid: 28f125b13bd16724d8a236ca291fd4e4, type: 3}
+        m_TargetAssemblyTypeName: Dictionaly, Assembly-CSharp
+        m_MethodName: ShowExplain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
