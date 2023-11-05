@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
 
     public SpawnListSO _spawnList;
 
-    
+    public CaughtCrab caughtCrab = new CaughtCrab() { crabName = "°Ô", crabCount = 0 };
+
+    public string crabjsonData;
 
     private void Awake()
     {
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+        crabjsonData = JsonUtility.ToJson(caughtCrab);
     }
 
     private void OnEnable()

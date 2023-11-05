@@ -25,6 +25,7 @@ public class FishingCrab : MonoBehaviour
 
     public bool _isThrow;
     public bool _isFishing;
+    private bool _crabCatch;
 
     public FISHINGSTATE curState;
 
@@ -35,6 +36,11 @@ public class FishingCrab : MonoBehaviour
     [SerializeField] private Transform _bobber;
 
     private Animator _anim;
+
+    //JSON
+    public CaughtCrab caughtCrab = new CaughtCrab() { crabName = "°Ô", crabCount = 0 };
+
+    public string crabjsonData;
     #endregion
 
     #region FishingBarSetting
@@ -100,6 +106,9 @@ public class FishingCrab : MonoBehaviour
     #region MainLogic
     private void Update()
     {
+        //JSON Update
+        crabjsonData = JsonUtility.ToJson(caughtCrab);
+
         Fishing();
 
         if (curState == FISHINGSTATE.CATCH)
@@ -173,9 +182,10 @@ public class FishingCrab : MonoBehaviour
     {
         _isFishing = false;
         _anim.SetBool("Catch", true);
-        Debug.Log("³¬À½");
+        ++caughtCrab.crabCount;
         _fishingLine.SetPosition(0, _CatchPos.position);
         yield return new WaitForSeconds(.9f);
+        Debug.Log("³¬À½ / ÀâÀº °Ô : " + crabjsonData);
         _anim.SetBool("Catch", false);
         yield return new WaitForSeconds(.1f);
         FishReset();
@@ -197,6 +207,7 @@ public class FishingCrab : MonoBehaviour
         _hookProgress = 0;
         curState = FISHINGSTATE.NONE;
         StopAllCoroutines();
+        _crabCatch = false;
         _isFishing = false;
     }
     #endregion
@@ -224,8 +235,11 @@ public class FishingCrab : MonoBehaviour
             }
         }
 
-        if (_hookProgress >= 1f)
+        if (_hookProgress >= 1f && !_crabCatch)
+        {
+            _crabCatch = true;
             StartCoroutine(Catch());
+        }
 
         _hookProgress = Mathf.Clamp(_hookProgress, 0f, 1f);
     }
