@@ -4664,6 +4664,7 @@ GameObject:
   - component: {fileID: 844957984}
   - component: {fileID: 844957985}
   - component: {fileID: 844957987}
+  - component: {fileID: 844957988}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4715,6 +4716,18 @@ MonoBehaviour:
   spawnTimeMin: 3
   spawnTimeMax: 3
   crabs: []
+--- !u!114 &844957988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844957983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1626cf38f0d83a84d888ccaddb20cd81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &855128950
 GameObject:
   m_ObjectHideFlags: 0
@@ -7598,7 +7611,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 844957988}
         m_TargetAssemblyTypeName: AutoMerge, Assembly-CSharp
         m_MethodName: Auto
         m_Mode: 1
