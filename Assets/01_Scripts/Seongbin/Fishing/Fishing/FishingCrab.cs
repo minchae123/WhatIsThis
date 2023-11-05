@@ -31,12 +31,13 @@ public class FishingCrab : MonoBehaviour
     private LineRenderer _fishingLine;
 
     [SerializeField] private Transform _fishingRodPos;
+    [SerializeField] private Transform _CatchPos;
     [SerializeField] private Transform _bobber;
 
     private Animator _anim;
     #endregion
 
-    #region FishingBar
+    #region FishingBarSetting
     [Header("FishingBar")]
     [SerializeField] private GameObject _fishingWindow;
 
@@ -81,6 +82,8 @@ public class FishingCrab : MonoBehaviour
     private void Start()
     {
         Resize();
+        _fishingLine.SetPosition(0, _fishingRodPos.position);
+        _fishingLine.SetPosition(1, _bobber.position);
     }
 
     private void Resize()
@@ -111,7 +114,6 @@ public class FishingCrab : MonoBehaviour
 
     void Fishing()
     {
-        _fishingLine.SetPosition(0, _fishingRodPos.position);
         _fishingLine.SetPosition(1, _bobber.position);
 
         if (Input.GetMouseButtonDown(0))
@@ -127,21 +129,25 @@ public class FishingCrab : MonoBehaviour
         if (curState == FISHINGSTATE.NONE)
         {
             _isThrow = false;
-            CatchBobber.resetGravity();
             _bobber.transform.eulerAngles = Vector3.zero;
-            _bobber.position = new Vector3(_fishingRodPos.position.x, _fishingRodPos.position.y - 1);
+            _anim.SetBool("Throw", false);
+            _anim.SetBool("Bite", false);
+
+            if (Vector3.Distance(_CatchPos.position, _bobber.position) < 0.3f)
+                _bobber.position = _CatchPos.position;
+            else
+                _bobber.position += 5 * Time.deltaTime * (_CatchPos.position - _bobber.position);
         }
         //던졌어
         if (curState == FISHINGSTATE.CASTING && !_isThrow)
         {
+            _anim.SetBool("Throw", true);
             _isThrow = true;
-            CatchBobber.bobberThrow();
         }
 
         //입질왔다
         if (curState == FISHINGSTATE.BITE)
-            CatchBobber.crabBite();
-        
+            _anim.SetBool("Bite", true);
         //물었다 
         if (curState == FISHINGSTATE.CASTING && !_isFishing) StartCoroutine(FishingStart());
     }
@@ -159,26 +165,21 @@ public class FishingCrab : MonoBehaviour
         curState = FISHINGSTATE.BITE;
         yield return new WaitForSeconds(biteTime);
 
-        //if (curState == FISHINGSTATE.CATCH)
-        //{
-        //    Debug.Log("물엇다");
-        //    //낚시 진입으로 바꿔야됨
-        //}
-        //else
-        //    StartCoroutine(Miss());
-
         if (curState != FISHINGSTATE.CATCH)
             StartCoroutine(Miss());
     }
 
     private IEnumerator Catch()
     {
-        _anim.SetTrigger("Catch");
+        _isFishing = false;
+        _anim.SetBool("Catch", true);
         Debug.Log("낚음");
-        CatchBobber.bobberUp();
+        _fishingLine.SetPosition(0, _CatchPos.position);
+        yield return new WaitForSeconds(.9f);
+        _anim.SetBool("Catch", false);
+        yield return new WaitForSeconds(.1f);
         FishReset();
-        yield return null;
-        //낚시찌 위로 올리고 로테이션 살짝 돌리고 1초 있다가 다시 원래대로
+        //낚시찌 위로 올리고 로테이션 살짝 돌리고 1초 있다가 다시 원래대로z
     }
 
     private IEnumerator Miss()
@@ -191,6 +192,7 @@ public class FishingCrab : MonoBehaviour
 
     private void FishReset()
     {
+        _fishingLine.SetPosition(0, _fishingRodPos.position);
         _failTimer = 10;
         _hookProgress = 0;
         curState = FISHINGSTATE.NONE;
