@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class AutoMerge : MonoBehaviour
+public class Auto : MonoBehaviour
 {
-
-
-    public void Auto()
+    public void AutoMerge()
     {
         float randX = Random.Range(-2f, 2f);
         float randY = Random.Range(-4f, 4f);
@@ -45,8 +43,6 @@ public class AutoMerge : MonoBehaviour
         {
             StartCoroutine(OnCheck(minIndices[0])); // 첫 번째 최소값을 가지는 인덱스에 대해만 코루틴 실행
         }
-
-
     }
 
     IEnumerator OnCheck(int index)
@@ -55,11 +51,5 @@ public class AutoMerge : MonoBehaviour
         CrabSpawnManager.Instance.crabs[index].GetComponent<Crab>().ColliderCheck = true;
         yield return new WaitForSeconds(0.05f);
         CrabSpawnManager.Instance.crabs[index].GetComponent<Crab>().ColliderCheck = false;
-    }
-
-    int FindNum(string str)
-    {
-        string temp = Regex.Replace(str, @"\D", ""); //str에 문자열중 일반문자를 ""공백문자로 대체한다 
-        return int.Parse(temp);
     }
 }

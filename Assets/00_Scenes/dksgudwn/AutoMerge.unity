@@ -7612,8 +7612,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 844957988}
-        m_TargetAssemblyTypeName: AutoMerge, Assembly-CSharp
-        m_MethodName: Auto
+        m_TargetAssemblyTypeName: Auto, Assembly-CSharp
+        m_MethodName: AutoMerge
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
