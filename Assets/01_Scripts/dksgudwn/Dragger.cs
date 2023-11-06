@@ -42,7 +42,6 @@ public class Dragger : MonoBehaviour
     {
         _crab.ColliderCheck = true;
         yield return new WaitForSeconds(0.05f);
-        //Debug.Log(_crab.ColliderCheck);
         _crab.ColliderCheck = false;
     }
 }
