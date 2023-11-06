@@ -38,7 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _SineAmp: 0.055
+    - _SineAmp: 0.01
     - _SineLength: 0.5
     - _SineSpeed: 0.29
     - _YValue: 0

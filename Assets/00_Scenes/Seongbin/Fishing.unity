@@ -319,6 +319,7 @@ MonoBehaviour:
   _fishingRodPos: {fileID: 2001367091}
   _CatchPos: {fileID: 1199920899}
   _bobber: {fileID: 1613006088}
+  crabjsonData: 
   _fishingWindow: {fileID: 1134144737}
   _topPivot: {fileID: 77730635}
   _bottomPivot: {fileID: 1390021266}
