@@ -6,8 +6,9 @@ public class CrabSpawnManager : MonoBehaviour
 {
     public static CrabSpawnManager Instance;
 
-    public float spawnTimeMin;
-    public float spawnTimeMax;
+    public float spawnTime;
+
+    public int crabMaxCount;
 
     public List<Crab> crabs = new List<Crab>();
 
@@ -27,7 +28,7 @@ public class CrabSpawnManager : MonoBehaviour
 
     IEnumerator StartSpawnCoroutine()
     {
-        while (true)
+        while (crabs.Count <= crabMaxCount)
         {
             int randX = Random.Range(-2, 2);
             int randY = Random.Range(-4, 4);
@@ -35,16 +36,11 @@ public class CrabSpawnManager : MonoBehaviour
             Crab obj = PoolManager.Instance.Pop(GameManager.Instance._spawnList.SpawnPairs[0].prefab.name) as Crab;
             crabs.Add(obj);
 
-            //obj.crabData = CrabManager.Instance.CrabData[0];
-            //obj.gameObject.GetComponent<SpriteRenderer>().sprite = CrabManager.Instance.CrabData[0].Image;
-            //obj.GetComponent<Crab>().crabData.Number = CrabManager.Instance.CrabData[0].Number;
             obj.transform.position = randPos;
 
-            float spawnTime = Random.Range(spawnTimeMin, spawnTimeMax);
             yield return new WaitForSeconds(spawnTime);
 
-            //리스트에 넣어주기
+            Debug.Log("df");
         }
     }
-
 }

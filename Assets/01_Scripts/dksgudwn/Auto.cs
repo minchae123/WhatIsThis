@@ -2,10 +2,12 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Auto : MonoBehaviour
 {
+    [SerializeField] private float mergeTime;
     public void AutoMerge()
     {
         float randX = Random.Range(-2f, 2f);
@@ -36,7 +38,7 @@ public class Auto : MonoBehaviour
 
         foreach (int minI in minIndices)
         {
-            CrabSpawnManager.Instance.crabs[minI].transform.DOMove(randPos, 1);
+            CrabSpawnManager.Instance.crabs[minI].transform.DOMove(randPos, mergeTime);
         }
 
         if (minIndices.Count > 0)
@@ -47,9 +49,29 @@ public class Auto : MonoBehaviour
 
     IEnumerator OnCheck(int index)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(mergeTime);
         CrabSpawnManager.Instance.crabs[index].GetComponent<Crab>().ColliderCheck = true;
         yield return new WaitForSeconds(0.05f);
         CrabSpawnManager.Instance.crabs[index].GetComponent<Crab>().ColliderCheck = false;
+    }
+
+    public void BurningMode()
+    {
+        StartCoroutine(BurningCoroutine());
+    }
+
+    IEnumerator BurningCoroutine()
+    {
+        mergeTime = 0.3f;
+        CrabSpawnManager.Instance.spawnTime = mergeTime;
+
+        for (int i = 0; i < 100; i++)
+        {
+            AutoMerge();
+            yield return new WaitForSeconds(mergeTime);
+        }
+
+        mergeTime = 1f;
+        CrabSpawnManager.Instance.spawnTime = mergeTime;
     }
 }
