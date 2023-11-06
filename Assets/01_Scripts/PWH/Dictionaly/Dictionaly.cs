@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class Dictionaly : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class Dictionaly : MonoBehaviour
     [SerializeField] private GameObject explain;
 
     private readonly string _imageName = "Visual";
+    private RectTransform rt;
 
-    private void Awake()
+    private void OnEnable()
     {
         for (int i = 0; i < _poolingSO.list.Count; i++)
         {
@@ -35,16 +37,29 @@ public class Dictionaly : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        //explain = GetComponent<RectTransform>();
+    }
+
     public void ShowExplain()
     {
         Debug.Log("asfghjhgfwerthvc");
 
-        explain = GameObject.Find("Explain");
+        GameObject clickGameObject = EventSystem.current.currentSelectedGameObject;
+        print(clickGameObject.transform.position);
+        MoveUI(clickGameObject.transform);
+    }
 
-        explain.GetComponent<RectTransform>().DOSizeDelta(new Vector2(800, 1400), 1);
-        //explain.transform.DOScale(new Vector3(800, 1400, 1), 1);
-        explain.GetComponent<RectTransform>().DOAnchorPosX(transform.position.x, 1);
-        explain.GetComponent<RectTransform>().DOAnchorPosX(transform.position.y, 1);
-        //explain.GetComponent<RectTransform>().DOAnchorPosX(0, 1);
+    private void MoveUI(Transform trm)
+    {
+        rt = explain.GetComponent<RectTransform>();
+
+        //explain.GetComponent<RectTransform>().localPosition = trm.GetComponent<RectTransform>().localPosition;
+        rt.anchoredPosition = trm.GetComponent<RectTransform>().anchoredPosition;
+
+        rt.DOSizeDelta(new Vector2(800, 1400), 1);
+        rt.DOAnchorPosX(transform.position.x, 1);
+        rt.DOAnchorPosX(transform.position.y, 1);
     }
 }
