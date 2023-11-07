@@ -2,13 +2,34 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class AutoMerge : MonoBehaviour
+public class Auto : MonoBehaviour
 {
+    [SerializeField] private float mergeTime;
+    [SerializeField] private float burningMergeTime; //0.1초 이상으로 설정하기
 
+    private float timer = 0f;
+    private float burningTime = 30f; // 버닝 시간
+    private int burningCount = 0; // 버닝 횟수
+    private Coroutine burningCoroutine;
 
-    public void Auto()
+    void Update()
+    {
+        if (burningCount > 0)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= burningTime)
+            {
+                burningCount--;
+                timer = 0f;
+            }
+        }
+    }
+
+    public void AutoMerge()
     {
         float randX = Random.Range(-2f, 2f);
         float randY = Random.Range(-4f, 4f);
@@ -38,28 +59,47 @@ public class AutoMerge : MonoBehaviour
 
         foreach (int minI in minIndices)
         {
-            CrabSpawnManager.Instance.crabs[minI].transform.DOMove(randPos, 1);
+            CrabSpawnManager.Instance.crabs[minI].transform.DOMove(randPos, mergeTime);
         }
 
         if (minIndices.Count > 0)
         {
             StartCoroutine(OnCheck(minIndices[0])); // 첫 번째 최소값을 가지는 인덱스에 대해만 코루틴 실행
         }
-
-
     }
 
     IEnumerator OnCheck(int index)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(mergeTime);
         CrabSpawnManager.Instance.crabs[index].GetComponent<Crab>().ColliderCheck = true;
         yield return new WaitForSeconds(0.05f);
         CrabSpawnManager.Instance.crabs[index].GetComponent<Crab>().ColliderCheck = false;
     }
 
-    int FindNum(string str)
+    public void BurningMode()
     {
-        string temp = Regex.Replace(str, @"\D", ""); //str에 문자열중 일반문자를 ""공백문자로 대체한다 
-        return int.Parse(temp);
+        burningCount++;
+
+        if (burningCoroutine != null)
+        {
+            StopCoroutine(burningCoroutine);
+        }
+
+        burningCoroutine = StartCoroutine(BurningCoroutine());
+    }
+
+    IEnumerator BurningCoroutine()
+    {
+        mergeTime = burningMergeTime;
+        CrabSpawnManager.Instance.spawnTime = mergeTime;
+
+        while (burningCount > 0)
+        {
+            AutoMerge();
+            yield return new WaitForSeconds(mergeTime);
+        }
+
+        mergeTime = 1f;
+        CrabSpawnManager.Instance.spawnTime = mergeTime;
     }
 }
