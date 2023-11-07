@@ -8,23 +8,23 @@ using UnityEngine;
 public class Auto : MonoBehaviour
 {
     [SerializeField] private float mergeTime;
-    [SerializeField] private float burningMergeTime; //0.1초 이상으로
+    [SerializeField] private float burningMergeTime; //0.1초 이상으로 설정하기
 
-    private float timer = 0f; // 타이머 변수
-    private float burningTime = 30f; // 30초 간격으로 증가할 시간 간격
-    private int burningCount = 0; // 증가시킬 변수
+    private float timer = 0f;
+    private float burningTime = 30f; // 버닝 시간
+    private int burningCount = 0; // 버닝 횟수
+    private Coroutine burningCoroutine;
 
     void Update()
     {
         if (burningCount > 0)
         {
-            print(burningCount);
             timer += Time.deltaTime;
 
             if (timer >= burningTime)
             {
                 burningCount--;
-                timer = 0f; // 타이머 초기화
+                timer = 0f;
             }
         }
     }
@@ -79,22 +79,26 @@ public class Auto : MonoBehaviour
     public void BurningMode()
     {
         burningCount++;
-        StopCoroutine(BurningCoroutine());
-        StartCoroutine(BurningCoroutine());
+
+        if (burningCoroutine != null)
+        {
+            StopCoroutine(burningCoroutine);
+        }
+
+        burningCoroutine = StartCoroutine(BurningCoroutine());
     }
 
     IEnumerator BurningCoroutine()
     {
         mergeTime = burningMergeTime;
         CrabSpawnManager.Instance.spawnTime = mergeTime;
-        print("burning start");
 
         while (burningCount > 0)
         {
             AutoMerge();
             yield return new WaitForSeconds(mergeTime);
         }
-        print("burning exit");
+
         mergeTime = 1f;
         CrabSpawnManager.Instance.spawnTime = mergeTime;
     }
