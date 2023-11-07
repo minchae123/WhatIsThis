@@ -43,8 +43,6 @@ public class CrabSpawnManager : MonoBehaviour
                 yield return new WaitForSeconds(spawnTime);
             }
             yield return new WaitForSeconds(0.1f);
-
-            Debug.Log("df");
         }
     }
 }

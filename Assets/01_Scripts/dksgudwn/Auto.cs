@@ -9,6 +9,26 @@ public class Auto : MonoBehaviour
 {
     [SerializeField] private float mergeTime;
     [SerializeField] private float burningMergeTime; //0.1초 이상으로
+
+    private float timer = 0f; // 타이머 변수
+    private float burningTime = 30f; // 30초 간격으로 증가할 시간 간격
+    private int burningCount = 0; // 증가시킬 변수
+
+    void Update()
+    {
+        if (burningCount > 0)
+        {
+            print(burningCount);
+            timer += Time.deltaTime;
+
+            if (timer >= burningTime)
+            {
+                burningCount--;
+                timer = 0f; // 타이머 초기화
+            }
+        }
+    }
+
     public void AutoMerge()
     {
         float randX = Random.Range(-2f, 2f);
@@ -58,6 +78,8 @@ public class Auto : MonoBehaviour
 
     public void BurningMode()
     {
+        burningCount++;
+        StopCoroutine(BurningCoroutine());
         StartCoroutine(BurningCoroutine());
     }
 
@@ -65,13 +87,14 @@ public class Auto : MonoBehaviour
     {
         mergeTime = burningMergeTime;
         CrabSpawnManager.Instance.spawnTime = mergeTime;
+        print("burning start");
 
-        for (int i = 0; i < 100; i++)
+        while (burningCount > 0)
         {
             AutoMerge();
             yield return new WaitForSeconds(mergeTime);
         }
-
+        print("burning exit");
         mergeTime = 1f;
         CrabSpawnManager.Instance.spawnTime = mergeTime;
     }
