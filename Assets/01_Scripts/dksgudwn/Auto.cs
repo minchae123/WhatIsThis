@@ -8,6 +8,7 @@ using UnityEngine;
 public class Auto : MonoBehaviour
 {
     [SerializeField] private float mergeTime;
+    [SerializeField] private float burningMergeTime; //0.1초 이상으로
     public void AutoMerge()
     {
         float randX = Random.Range(-2f, 2f);
@@ -62,7 +63,7 @@ public class Auto : MonoBehaviour
 
     IEnumerator BurningCoroutine()
     {
-        mergeTime = 0.3f;
+        mergeTime = burningMergeTime;
         CrabSpawnManager.Instance.spawnTime = mergeTime;
 
         for (int i = 0; i < 100; i++)

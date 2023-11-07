@@ -4864,6 +4864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mergeTime: 1
+  burningMergeTime: 0.2
 --- !u!1 &855128950
 GameObject:
   m_ObjectHideFlags: 0

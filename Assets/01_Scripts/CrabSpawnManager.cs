@@ -28,17 +28,21 @@ public class CrabSpawnManager : MonoBehaviour
 
     IEnumerator StartSpawnCoroutine()
     {
-        while (crabs.Count <= crabMaxCount)
+        while (true)
         {
-            int randX = Random.Range(-2, 2);
-            int randY = Random.Range(-4, 4);
-            Vector2 randPos = new Vector2(randX, randY);
-            Crab obj = PoolManager.Instance.Pop(GameManager.Instance._spawnList.SpawnPairs[0].prefab.name) as Crab;
-            crabs.Add(obj);
+            if (crabs.Count <= crabMaxCount)
+            {
+                int randX = Random.Range(-2, 2);
+                int randY = Random.Range(-4, 4);
+                Vector2 randPos = new Vector2(randX, randY);
+                Crab obj = PoolManager.Instance.Pop(GameManager.Instance._spawnList.SpawnPairs[0].prefab.name) as Crab;
+                crabs.Add(obj);
 
-            obj.transform.position = randPos;
+                obj.transform.position = randPos;
 
-            yield return new WaitForSeconds(spawnTime);
+                yield return new WaitForSeconds(spawnTime);
+            }
+            yield return new WaitForSeconds(0.1f);
 
             Debug.Log("df");
         }
